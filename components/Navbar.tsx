@@ -367,6 +367,10 @@ function SocialButton({
         justifyContent: "center",
         textDecoration: "none",
         boxShadow: "0 5px 14px rgba(0,0,0,0.06)",
+        outline: "none",
+        border: "none",
+        boxShadow: "none",
+        WebkitTapHighlightColor: "transparent",
       }}
     >
       {children}
@@ -376,12 +380,7 @@ function SocialButton({
 
 function FacebookIcon() {
   return (
-    <svg
-      width="17"
-      height="17"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
       <path d="M13.5 22V13.5H16.4L16.8 10.2H13.5V8.1C13.5 7.1 13.8 6.5 15.2 6.5H17V3.5C16.7 3.4 15.6 3.3 14.4 3.3C11.8 3.3 10.1 4.8 10.1 7.8V10.2H7.2V13.5H10.1V22H13.5Z" />
     </svg>
   );
@@ -397,39 +396,18 @@ function InstagramIcon() {
       stroke="currentColor"
       strokeWidth="2"
     >
-      <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-      />
+      <rect x="3" y="3" width="18" height="18" rx="5" />
 
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-      />
+      <circle cx="12" cy="12" r="4" />
 
-      <circle
-        cx="17.5"
-        cy="6.5"
-        r="1"
-        fill="currentColor"
-        stroke="none"
-      />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 
 function TikTokIcon() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
       <path d="M15.2 3C15.5 5.2 16.7 6.5 19 6.7V9.6C17.6 9.7 16.3 9.3 15.2 8.5V14.3C15.2 18 12.7 21 9.1 21C5.8 21 3 18.4 3 15C3 11.3 6 8.7 9.9 9V12C8.2 11.7 6.1 12.7 6.1 15C6.1 16.7 7.4 18 9.1 18C11.2 18 12.2 16.3 12.2 14.3V3H15.2Z" />
     </svg>
   );
@@ -437,18 +415,10 @@ function TikTokIcon() {
 
 function YoutubeIcon() {
   return (
-    <svg
-      width="19"
-      height="19"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
       <path d="M22 12C22 9.8 21.8 8.4 21.6 7.7C21.4 6.9 20.8 6.3 20 6.1C18.6 5.7 12 5.7 12 5.7C12 5.7 5.4 5.7 4 6.1C3.2 6.3 2.6 6.9 2.4 7.7C2.2 8.4 2 9.8 2 12C2 14.2 2.2 15.6 2.4 16.3C2.6 17.1 3.2 17.7 4 17.9C5.4 18.3 12 18.3 12 18.3C12 18.3 18.6 18.3 20 17.9C20.8 17.7 21.4 17.1 21.6 16.3C21.8 15.6 22 14.2 22 12Z" />
 
-      <path
-        d="M10 9L16 12L10 15V9Z"
-        fill="#ffffff"
-      />
+      <path d="M10 9L16 12L10 15V9Z" fill="#ffffff" />
     </svg>
   );
 }

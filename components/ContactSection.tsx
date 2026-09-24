@@ -27,49 +27,24 @@ export default function ContactSection() {
       style={{
         position: "relative",
         overflow: "hidden",
-        background:
-          "linearGradient(135deg, #eefaff 0%, #ffffff 50%, #f2fff7 100%)",
+        background: "#f3fbff",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          width: mobile ? 260 : 520,
-          height: mobile ? 260 : 520,
-          borderRadius: "50%",
-          background: "rgba(21, 169, 228, 0.08)",
-          right: mobile ? 0 : 40,
-          top: mobile ? 30 : 10,
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          width: mobile ? 200 : 360,
-          height: mobile ? 200 : 360,
-          borderRadius: "50%",
-          background: "rgba(14, 153, 71, 0.07)",
-          left: mobile ? 0 : 30,
-          bottom: 0,
-        }}
-      />
-
       <div
         style={{
           position: "relative",
           zIndex: 2,
           width: "min(92%, 1420px)",
           margin: "0 auto",
-          paddingTop: mobile ? 60 : 90,
-          paddingBottom: mobile ? 60 : 90,
+          paddingTop: mobile ? 55 : 80,
+          paddingBottom: mobile ? 55 : 80,
         }}
       >
         <div
           style={{
             textAlign: "center",
             maxWidth: 680,
-            margin: "0 auto 42px",
+            margin: "0 auto 38px",
           }}
         >
           <div
@@ -79,7 +54,7 @@ export default function ContactSection() {
               fontWeight: 850,
               letterSpacing: 1.5,
               textTransform: "uppercase",
-              marginBottom: 11,
+              marginBottom: 10,
             }}
           >
             Contact 1 Sip
@@ -89,12 +64,13 @@ export default function ContactSection() {
             style={{
               margin: 0,
               color: "#073f78",
-              fontSize: mobile ? 36 : 50,
+              fontSize: mobile ? 35 : 48,
               lineHeight: 1.08,
               fontWeight: 850,
             }}
           >
             Fresh Water
+
             <span
               style={{
                 display: "block",
@@ -107,10 +83,10 @@ export default function ContactSection() {
 
           <p
             style={{
-              margin: "16px auto 0",
+              margin: "15px auto 0",
               color: "#657f94",
-              fontSize: mobile ? 14 : 16,
-              lineHeight: 1.75,
+              fontSize: mobile ? 14 : 15,
+              lineHeight: 1.7,
             }}
           >
             Contact 1 Sip Natural Water for product information, orders and
@@ -121,39 +97,30 @@ export default function ContactSection() {
         <div
           style={{
             position: "relative",
-            minHeight: mobile ? 760 : 560,
-            borderRadius: mobile ? 26 : 34,
+            minHeight: mobile ? 780 : 535,
             overflow: "hidden",
+            borderRadius: mobile ? 25 : 32,
             background: "#ffffff",
-            boxShadow: "0 25px 70px rgba(4,65,105,0.12)",
-            border: "1px solid rgba(7,63,120,0.07)",
+            border: "1px solid rgba(7,63,120,0.06)",
+            boxShadow: "0 24px 65px rgba(4,65,105,0.10)",
           }}
         >
           <div
             style={{
               position: "absolute",
               inset: 0,
-              width: mobile ? "100%" : "58%",
+              zIndex: 0,
             }}
           >
             <Image
               src="/images/aboutCholistan.png"
               alt="Cholistan landscape"
               fill
-              sizes="(maxWidth: 900px) 100vw, 58vw"
+              priority={false}
+              sizes="100vw"
               style={{
                 objectFit: "cover",
                 objectPosition: "center",
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: mobile
-                  ? "linearGradient(180deg, rgba(4,38,72,0.16) 0%, rgba(4,38,72,0.48) 100%)"
-                  : "linearGradient(90deg, rgba(4,38,72,0.12) 0%, rgba(4,38,72,0.20) 55%, rgba(4,38,72,0.65) 100%)",
               }}
             />
           </div>
@@ -161,61 +128,90 @@ export default function ContactSection() {
           <div
             style={{
               position: "absolute",
-              right: mobile ? "50%" : 0,
-              bottom: mobile ? 10 : 0,
+              inset: 0,
+              zIndex: 1,
+              background: mobile
+                ? "rgba(255,255,255,0.18)"
+                : "rgba(255,255,255,0.08)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 2,
+              width: mobile ? "100%" : "47%",
+              background: mobile
+                ? "rgba(238,249,255,0.18)"
+                : "rgba(238,249,255,0.56)",
+              backdropFilter: "blur(2px)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              zIndex: 4,
+              right: mobile ? "50%" : 12,
+              bottom: mobile ? 5 : 0,
               transform: mobile ? "translateX(50%)" : "none",
-              width: mobile ? "92%" : "48%",
-              height: mobile ? 330 : "100%",
+              width: mobile ? "94%" : "45%",
+              height: mobile ? 330 : "94%",
               display: "flex",
               alignItems: "flexEnd",
               justifyContent: "center",
-              background: mobile
-                ? "transparent"
-                : "linearGradient(90deg, rgba(255,255,255,0) 0%, rgba(238,249,255,0.82) 28%, rgba(238,249,255,0.98) 100%)",
             }}
           >
             <Image
               src="/images/heroProducts.png"
               alt="1 Sip Natural Water products"
-              width={680}
-              height={560}
-              sizes="(maxWidth: 900px) 92vw, 48vw"
+              width={650}
+              height={530}
+              sizes="100vw"
               style={{
-                width: mobile ? "88%" : "92%",
-                maxWidth: mobile ? 520 : 620,
+                width: mobile ? "84%" : "87%",
+                maxWidth: mobile ? 500 : 560,
                 height: "auto",
                 objectFit: "contain",
-                filter: "dropShadow(0 25px 34px rgba(3,68,115,0.20))",
+                transform: mobile
+                  ? "translateY(8px)"
+                  : "translateY(8px)",
               }}
             />
           </div>
 
           <div
             style={{
-              position: "relative",
-              zIndex: 5,
-              width: mobile ? "auto" : 390,
-              marginLeft: mobile ? 18 : 55,
-              paddingTop: mobile ? 42 : 58,
+              position: "absolute",
+              zIndex: 6,
+              left: mobile ? 18 : 55,
+              top: mobile ? 35 : 72,
+              width: mobile ? "calc(100% + 0px)" : 365,
+              maxWidth: mobile ? "calc(100% + 0px)" : 365,
+              right: mobile ? 18 : "auto",
             }}
           >
             <div
               style={{
-                padding: mobile ? 24 : 30,
-                borderRadius: 24,
-                background: "rgba(255,255,255,0.93)",
+                padding: mobile ? 23 : 27,
+                borderRadius: mobile ? 22 : 24,
+                background: "rgba(255,255,255,0.94)",
                 backdropFilter: "blur(14px)",
-                boxShadow: "0 18px 50px rgba(3,45,85,0.16)",
+                boxShadow: "0 17px 45px rgba(3,45,85,0.15)",
               }}
             >
               <div
                 style={{
                   color: "#0b9346",
-                  fontSize: 12,
-                  fontWeight: 850,
+                  fontSize: mobile ? 13 : 14,
+                  fontWeight: 900,
                   textTransform: "uppercase",
-                  letterSpacing: 1.3,
-                  marginBottom: 9,
+                  letterSpacing: 1.8,
+                  marginBottom: 10,
                 }}
               >
                 Get in Touch
@@ -225,9 +221,9 @@ export default function ContactSection() {
                 style={{
                   margin: 0,
                   color: "#073f78",
-                  fontSize: mobile ? 25 : 30,
-                  fontWeight: 850,
+                  fontSize: mobile ? 24 : 28,
                   lineHeight: 1.15,
+                  fontWeight: 850,
                 }}
               >
                 1 Sip Natural Water
@@ -235,9 +231,9 @@ export default function ContactSection() {
 
               <p
                 style={{
-                  margin: "8px 0 0",
+                  margin: "7px 0 0",
                   color: "#71889b",
-                  fontSize: 13,
+                  fontSize: 12.5,
                 }}
               >
                 Nature in Every Sip
@@ -247,32 +243,32 @@ export default function ContactSection() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: 14,
-                  marginTop: 25,
+                  gap: 13,
+                  marginTop: 22,
                 }}
               >
                 <ContactItem
+                  icon="📍"
                   title="Location"
                   text="Commercial Market, Ahmed Garden, Fort Abbas"
-                  icon="location"
                 />
 
                 <ContactItem
+                  icon="☎"
                   title="Phone"
                   text="0312 6016060"
-                  icon="phone"
                 />
 
                 <ContactItem
+                  icon="💬"
                   title="WhatsApp"
                   text="0312 6016060"
-                  icon="message"
                 />
 
                 <ContactItem
+                  icon="🏢"
                   title="Company"
                   text="Mian Rayan Traders"
-                  icon="company"
                 />
               </div>
 
@@ -281,14 +277,14 @@ export default function ContactSection() {
                   display: "flex",
                   flexDirection: mobile ? "column" : "row",
                   gap: 10,
-                  marginTop: 26,
+                  marginTop: 23,
                 }}
               >
                 <Link
                   href="tel:+923126016060"
                   style={{
                     flex: 1,
-                    padding: "13px 18px",
+                    padding: "12px 17px",
                     borderRadius: 40,
                     background: "#073f78",
                     color: "#ffffff",
@@ -306,7 +302,7 @@ export default function ContactSection() {
                   target="_blank"
                   style={{
                     flex: 1,
-                    padding: "13px 18px",
+                    padding: "12px 17px",
                     borderRadius: 40,
                     background: "#0b9848",
                     color: "#ffffff",
@@ -321,38 +317,6 @@ export default function ContactSection() {
               </div>
             </div>
           </div>
-
-          {!mobile && (
-            <div
-              style={{
-                position: "absolute",
-                left: 55,
-                bottom: 34,
-                zIndex: 4,
-                color: "#ffffff",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 750,
-                  opacity: 0.85,
-                }}
-              >
-                From the Heart of Cholistan
-              </div>
-
-              <div
-                style={{
-                  marginTop: 4,
-                  fontSize: 20,
-                  fontWeight: 850,
-                }}
-              >
-                Pure Water for Every Day
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>
@@ -360,44 +324,45 @@ export default function ContactSection() {
 }
 
 function ContactItem({
+  icon,
   title,
   text,
-  icon,
 }: {
+  icon: string;
   title: string;
   text: string;
-  icon: string;
 }) {
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
-        gap: 12,
+        gap: 11,
       }}
     >
       <div
         style={{
-          width: 44,
-          height: 44,
+          width: 41,
+          height: 41,
           flexShrink: 0,
-          borderRadius: 13,
+          borderRadius: 12,
           background: "rgba(11,145,70,0.08)",
           color: "#0b9146",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: 17,
         }}
       >
-        <ContactIcon type={icon} />
+        {icon}
       </div>
 
       <div>
         <div
           style={{
-            color: "#7890a2",
+            color: "#8295a5",
             fontSize: 10.5,
-            marginBottom: 3,
+            marginBottom: 2,
           }}
         >
           {title}
@@ -406,7 +371,7 @@ function ContactItem({
         <div
           style={{
             color: "#073f78",
-            fontSize: 13,
+            fontSize: 12.5,
             fontWeight: 800,
             lineHeight: 1.45,
           }}
@@ -415,72 +380,5 @@ function ContactItem({
         </div>
       </div>
     </div>
-  );
-}
-
-function ContactIcon({
-  type,
-}: {
-  type: string;
-}) {
-  if (type === "location") {
-    return (
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      >
-        <circle cx="12" cy="10" r="3" />
-        <path d="M12 22s7 6 7 12A7 7 0 0 0 5 12c0 6 7 10 7 10Z" />
-      </svg>
-    );
-  }
-
-  if (type === "phone") {
-    return (
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      >
-        <path d="M6 3h4l2 5 3 3 5 2v4c0 2 1 4 3 5 2 1 5 1 7 0l2 2c1 1 2 1 3 1" />
-      </svg>
-    );
-  }
-
-  if (type === "message") {
-    return (
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      >
-        <path d="M4 4h16v12H8l4 4v4Z" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <rect x="4" y="6" width="16" height="14" rx="2" />
-      <path d="M9 6V4h6v2" />
-      <path d="M8 11h8" />
-    </svg>
   );
 }
