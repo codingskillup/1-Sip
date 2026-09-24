@@ -27,13 +27,11 @@ export default function ContactSection() {
       style={{
         position: "relative",
         overflow: "hidden",
-        background: "#f3fbff",
+        background: "#f4fbff",
       }}
     >
       <div
         style={{
-          position: "relative",
-          zIndex: 2,
           width: "min(92%, 1420px)",
           margin: "0 auto",
           paddingTop: mobile ? 55 : 80,
@@ -43,7 +41,7 @@ export default function ContactSection() {
         <div
           style={{
             textAlign: "center",
-            maxWidth: 680,
+            maxWidth: 720,
             margin: "0 auto 38px",
           }}
         >
@@ -97,9 +95,9 @@ export default function ContactSection() {
         <div
           style={{
             position: "relative",
-            minHeight: mobile ? 780 : 535,
+            minHeight: mobile ? 850 : 560,
             overflow: "hidden",
-            borderRadius: mobile ? 25 : 32,
+            borderRadius: mobile ? 24 : 32,
             background: "#ffffff",
             border: "1px solid rgba(7,63,120,0.06)",
             boxShadow: "0 24px 65px rgba(4,65,105,0.10)",
@@ -116,7 +114,6 @@ export default function ContactSection() {
               src="/images/aboutCholistan.png"
               alt="Cholistan landscape"
               fill
-              priority={false}
               sizes="100vw"
               style={{
                 objectFit: "cover",
@@ -131,8 +128,8 @@ export default function ContactSection() {
               inset: 0,
               zIndex: 1,
               background: mobile
-                ? "rgba(255,255,255,0.18)"
-                : "rgba(255,255,255,0.08)",
+                ? "rgba(255,255,255,0.10)"
+                : "rgba(255,255,255,0.04)",
               pointerEvents: "none",
             }}
           />
@@ -140,78 +137,38 @@ export default function ContactSection() {
           <div
             style={{
               position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 2,
-              width: mobile ? "100%" : "47%",
-              background: mobile
-                ? "rgba(238,249,255,0.18)"
-                : "rgba(238,249,255,0.56)",
-              backdropFilter: "blur(2px)",
-            }}
-          />
-
-          <div
-            style={{
-              position: "absolute",
-              zIndex: 4,
-              right: mobile ? "50%" : 12,
-              bottom: mobile ? 5 : 0,
-              transform: mobile ? "translateX(50%)" : "none",
-              width: mobile ? "94%" : "45%",
-              height: mobile ? 330 : "94%",
+              zIndex: 3,
+              left: mobile ? 0 : 0,
+              top: mobile ? 20 : 0,
+              width: mobile ? "100%" : "50%",
+              height: mobile ? 470 : "100%",
               display: "flex",
-              alignItems: "flexEnd",
+              alignItems: "center",
               justifyContent: "center",
-            }}
-          >
-            <Image
-              src="/images/heroProducts.png"
-              alt="1 Sip Natural Water products"
-              width={650}
-              height={530}
-              sizes="100vw"
-              style={{
-                width: mobile ? "84%" : "87%",
-                maxWidth: mobile ? 500 : 560,
-                height: "auto",
-                objectFit: "contain",
-                transform: mobile
-                  ? "translateY(8px)"
-                  : "translateY(8px)",
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              position: "absolute",
-              zIndex: 6,
-              left: mobile ? 18 : 55,
-              top: mobile ? 35 : 72,
-              width: mobile ? "calc(100% + 0px)" : 365,
-              maxWidth: mobile ? "calc(100% + 0px)" : 365,
-              right: mobile ? 18 : "auto",
+              paddingLeft: mobile ? 18 : 30,
+              paddingRight: mobile ? 18 : 30,
+              boxSizing: "border-box",
             }}
           >
             <div
               style={{
-                padding: mobile ? 23 : 27,
-                borderRadius: mobile ? 22 : 24,
-                background: "rgba(255,255,255,0.94)",
-                backdropFilter: "blur(14px)",
-                boxShadow: "0 17px 45px rgba(3,45,85,0.15)",
+                width: mobile ? "92%" : 460,
+                maxWidth: 460,
+                padding: mobile ? 24 : 34,
+                borderRadius: mobile ? 22 : 28,
+                background: "rgba(255,255,255,0.95)",
+                boxShadow: "0 20px 50px rgba(3,45,85,0.15)",
               }}
             >
               <div
                 style={{
                   color: "#0b9346",
-                  fontSize: mobile ? 13 : 14,
+                  fontSize: mobile ? 16 : 18,
                   fontWeight: 900,
                   textTransform: "uppercase",
-                  letterSpacing: 1.8,
-                  marginBottom: 10,
+                  letterSpacing: 2.2,
+                  marginBottom: 14,
+                  textAlign: "center",
                 }}
               >
                 Get in Touch
@@ -221,9 +178,10 @@ export default function ContactSection() {
                 style={{
                   margin: 0,
                   color: "#073f78",
-                  fontSize: mobile ? 24 : 28,
-                  lineHeight: 1.15,
+                  fontSize: mobile ? 27 : 38,
+                  lineHeight: 1.12,
                   fontWeight: 850,
+                  textAlign: "left",
                 }}
               >
                 1 Sip Natural Water
@@ -231,9 +189,9 @@ export default function ContactSection() {
 
               <p
                 style={{
-                  margin: "7px 0 0",
+                  margin: "10px 0 0",
                   color: "#71889b",
-                  fontSize: 12.5,
+                  fontSize: mobile ? 14 : 15,
                 }}
               >
                 Nature in Every Sip
@@ -243,8 +201,8 @@ export default function ContactSection() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: 13,
-                  marginTop: 22,
+                  gap: 15,
+                  marginTop: 28,
                 }}
               >
                 <ContactItem
@@ -276,21 +234,21 @@ export default function ContactSection() {
                 style={{
                   display: "flex",
                   flexDirection: mobile ? "column" : "row",
-                  gap: 10,
-                  marginTop: 23,
+                  gap: 12,
+                  marginTop: 28,
                 }}
               >
                 <Link
                   href="tel:+923126016060"
                   style={{
                     flex: 1,
-                    padding: "12px 17px",
+                    padding: "14px 18px",
                     borderRadius: 40,
-                    background: "#073f78",
+                    background: "#0b4a8f",
                     color: "#ffffff",
                     textDecoration: "none",
                     textAlign: "center",
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: 800,
                   }}
                 >
@@ -302,13 +260,13 @@ export default function ContactSection() {
                   target="_blank"
                   style={{
                     flex: 1,
-                    padding: "12px 17px",
+                    padding: "14px 18px",
                     borderRadius: 40,
-                    background: "#0b9848",
+                    background: "#10a34a",
                     color: "#ffffff",
                     textDecoration: "none",
                     textAlign: "center",
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: 800,
                   }}
                 >
@@ -316,6 +274,34 @@ export default function ContactSection() {
                 </Link>
               </div>
             </div>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              zIndex: 4,
+              right: mobile ? "4%" : "1%",
+              bottom: mobile ? 5 : 0,
+              width: mobile ? "92%" : "48%",
+              height: mobile ? 370 : "96%",
+              display: "flex",
+              alignItems: "flexEnd",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src="/images/heroProducts.png"
+              alt="1 Sip Natural Water products"
+              width={650}
+              height={530}
+              sizes="100vw"
+              style={{
+                width: mobile ? "82%" : "90%",
+                maxWidth: mobile ? 500 : 600,
+                height: "auto",
+                objectFit: "contain",
+              }}
+            />
           </div>
         </div>
       </div>
@@ -337,21 +323,21 @@ function ContactItem({
       style={{
         display: "flex",
         alignItems: "center",
-        gap: 11,
+        gap: 13,
       }}
     >
       <div
         style={{
-          width: 41,
-          height: 41,
+          width: 50,
+          height: 50,
           flexShrink: 0,
-          borderRadius: 12,
+          borderRadius: 14,
           background: "rgba(11,145,70,0.08)",
           color: "#0b9146",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 17,
+          fontSize: 20,
         }}
       >
         {icon}
@@ -361,8 +347,8 @@ function ContactItem({
         <div
           style={{
             color: "#8295a5",
-            fontSize: 10.5,
-            marginBottom: 2,
+            fontSize: 12,
+            marginBottom: 3,
           }}
         >
           {title}
@@ -371,7 +357,7 @@ function ContactItem({
         <div
           style={{
             color: "#073f78",
-            fontSize: 12.5,
+            fontSize: 15,
             fontWeight: 800,
             lineHeight: 1.45,
           }}

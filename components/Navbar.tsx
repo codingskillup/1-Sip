@@ -366,7 +366,7 @@ function SocialButton({
         alignItems: "center",
         justifyContent: "center",
         textDecoration: "none",
-        boxShadow: "0 5px 14px rgba(0,0,0,0.06)",
+        // boxShadow: "0 5px 14px rgba(0,0,0,0.06)",
         outline: "none",
         border: "none",
         boxShadow: "none",
