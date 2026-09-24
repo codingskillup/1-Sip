@@ -8,6 +8,7 @@ import CholistanStory from "@/components/CholistanStory";
 import QualityPurity from "@/components/QualityPurity";
 import BrandPromise from "@/components/BrandPromise";
 import FreshSipCTA from "@/components/FreshSipCTA";
+import ContactSection from "@/components/ContactSection";
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <QualityPurity/>
       <BrandPromise/>
       <FreshSipCTA/>
+      <ContactSection/>
     </>
   );
 }
