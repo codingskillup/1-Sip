@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhyOneSip from "@/components/WhyOneSip";
+import AboutUs from "@/components/AboutUs";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <WhyOneSip />
+      <AboutUs />
     </>
   );
 }
