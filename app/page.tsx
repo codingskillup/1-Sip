@@ -5,6 +5,8 @@ import AboutUs from "@/components/AboutUs";
 import Products from "@/components/Products";
 import ProductFeatures from "@/components/ProductFeatures";
 import CholistanStory from "@/components/CholistanStory";
+import QualityPurity from "@/components/QualityPurity";
+
 
 export default function Home() {
   return (
@@ -16,6 +18,7 @@ export default function Home() {
       <Products />
       <ProductFeatures />
       <CholistanStory />
+      <QualityPurity/>
     </>
   );
 }
