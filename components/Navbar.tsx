@@ -17,6 +17,7 @@ const menuItems = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [active, setActive] = useState("Home");
 
   useEffect(() => {
     const checkScreen = () => {
@@ -46,6 +47,11 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  const handleMenuClick = (label: string) => {
+    setActive(label);
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <header
@@ -54,18 +60,18 @@ export default function Navbar() {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 1000,
           width: "100%",
-          background: "rgba(255,255,255,0.97)",
-          backdropFilter: "blur(15px)",
-          borderBottom: "1px solid rgba(5,55,105,0.08)",
-          boxShadow: "0 5px 20px rgba(0,48,94,0.05)",
+          zIndex: 1000,
+          background: "rgba(255,255,255,0.98)",
+          backdropFilter: "blur(14px)",
+          borderBottom: "1px solid rgba(5,55,105,0.07)",
+          boxShadow: "0 4px 18px rgba(5,50,90,0.04)",
         }}
       >
         <div
           style={{
-            width: "min(92%, 1760px)",
-            height: mobile ? 68 : 102,
+            width: "min(92%, 1680px)",
+            height: mobile ? 66 : 82,
             margin: "0 auto",
             display: "flex",
             alignItems: "center",
@@ -73,7 +79,7 @@ export default function Navbar() {
         >
           <Link
             href="#home"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => handleMenuClick("Home")}
             style={{
               display: "flex",
               alignItems: "center",
@@ -84,12 +90,12 @@ export default function Navbar() {
             <Image
               src="/images/oneSipLogo.png"
               alt="1 Sip Natural Water"
-              width={68}
-              height={68}
+              width={56}
+              height={56}
               priority
               style={{
-                width: mobile ? 54 : 66,
-                height: mobile ? 54 : 66,
+                width: mobile ? 52 : 56,
+                height: mobile ? 52 : 56,
                 objectFit: "contain",
               }}
             />
@@ -100,47 +106,50 @@ export default function Navbar() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                gap: 38,
-                flex: 1,
-                marginLeft: 70,
+                gap: 30,
+                marginLeft: 48,
               }}
             >
-              {menuItems.map((item, index) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  style={{
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    height: 102,
-                    textDecoration: "none",
-                    color: index === 0 ? "#07883f" : "#073b6e",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.label}
+              {menuItems.map((item) => {
+                const isActive = active === item.label;
 
-                  {index === 0 && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        left: 0,
-                        right: 0,
-                        bottom: 22,
-                        width: 34,
-                        height: 3,
-                        margin: "auto",
-                        borderRadius: 20,
-                        background: "#18a04d",
-                      }}
-                    />
-                  )}
-                </Link>
-              ))}
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => handleMenuClick(item.label)}
+                    style={{
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "center",
+                      height: 82,
+                      textDecoration: "none",
+                      color: isActive ? "#0a8d45" : "#073c70",
+                      fontSize: 15,
+                      fontWeight: 700,
+                      whiteSpace: "nowrap",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {item.label}
+
+                    {isActive && (
+                      <span
+                        style={{
+                          position: "absolute",
+                          left: "50%",
+                          bottom: 15,
+                          width: 30,
+                          height: 3,
+                          borderRadius: 20,
+                          background: "#14a04d",
+                          transform: "translateX(-50%)",
+                        }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
             </nav>
           )}
 
@@ -149,8 +158,8 @@ export default function Navbar() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 12,
-                marginLeft: 35,
+                gap: 10,
+                marginLeft: "auto",
               }}
             >
               <SocialButton href="#" background="#1877f2">
@@ -174,25 +183,31 @@ export default function Navbar() {
           {mobile && (
             <button
               type="button"
-              onClick={() => setMenuOpen(value => !value)}
-              ariaLabel="Menu"
+              title="Menu"
+              onClick={() => setMenuOpen((value) => !value)}
               style={{
-                width: 44,
-                height: 44,
+                width: 42,
+                height: 42,
                 marginLeft: "auto",
                 border: "none",
-                borderRadius: 12,
+                borderRadius: 11,
                 background: "#eef7fc",
-                color: "#073b6e",
                 cursor: "pointer",
-                fontSize: menuOpen ? 27 : 0,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
               {menuOpen ? (
-                "×"
+                <span
+                  style={{
+                    color: "#073c70",
+                    fontSize: 28,
+                    lineHeight: 1,
+                  }}
+                >
+                  ×
+                </span>
               ) : (
                 <div
                   style={{
@@ -203,28 +218,28 @@ export default function Navbar() {
                 >
                   <span
                     style={{
-                      width: 22,
+                      width: 21,
                       height: 2,
-                      borderRadius: 10,
-                      background: "#073b6e",
+                      background: "#073c70",
+                      borderRadius: 20,
                     }}
                   />
 
                   <span
                     style={{
-                      width: 22,
+                      width: 21,
                       height: 2,
-                      borderRadius: 10,
-                      background: "#073b6e",
+                      background: "#073c70",
+                      borderRadius: 20,
                     }}
                   />
 
                   <span
                     style={{
-                      width: 22,
+                      width: 21,
                       height: 2,
-                      borderRadius: 10,
-                      background: "#073b6e",
+                      background: "#073c70",
+                      borderRadius: 20,
                     }}
                   />
                 </div>
@@ -236,7 +251,7 @@ export default function Navbar() {
 
       <div
         style={{
-          height: mobile ? 68 : 102,
+          height: mobile ? 66 : 82,
         }}
       />
 
@@ -245,22 +260,23 @@ export default function Navbar() {
           onClick={() => setMenuOpen(false)}
           style={{
             position: "fixed",
-            top: 68,
+            top: 66,
             left: 0,
             right: 0,
             bottom: 0,
             zIndex: 999,
-            background: "rgba(2,31,61,0.4)",
-            backdropFilter: "blur(6px)",
+            background: "rgba(3,30,60,0.38)",
+            backdropFilter: "blur(5px)",
           }}
         >
           <div
-            onClick={event => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
             style={{
               background: "#ffffff",
-              padding: "18px 5% 26px",
-              borderBottomLeftRadius: 25,
-              borderBottomRightRadius: 25,
+              padding: "15px 5% 24px",
+              borderBottomLeftRadius: 22,
+              borderBottomRightRadius: 22,
+              boxShadow: "0 20px 40px rgba(5,50,90,0.13)",
             }}
           >
             <nav
@@ -269,30 +285,38 @@ export default function Navbar() {
                 flexDirection: "column",
               }}
             >
-              {menuItems.map(item => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    padding: "14px 10px",
-                    color: "#073b6e",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    textDecoration: "none",
-                    borderBottom: "1px solid #edf2f7",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = active === item.label;
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => handleMenuClick(item.label)}
+                    style={{
+                      padding: "13px 12px",
+                      borderRadius: 10,
+                      color: isActive ? "#ffffff" : "#073c70",
+                      background: isActive ? "#0a8d45" : "transparent",
+                      fontSize: 15,
+                      fontWeight: 700,
+                      textDecoration: "none",
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div
               style={{
                 display: "flex",
-                gap: 11,
-                marginTop: 20,
+                alignItems: "center",
+                gap: 10,
+                marginTop: 18,
+                paddingTop: 17,
+                borderTop: "1px solid #e8eef3",
               }}
             >
               <SocialButton href="#" background="#1877f2">
@@ -331,17 +355,18 @@ function SocialButton({
     <Link
       href={href}
       target="_blank"
-      ariaLabel="Social Media"
       style={{
-        width: 42,
-        height: 42,
+        width: 38,
+        height: 38,
         borderRadius: "50%",
+        flexShrink: 0,
         background,
         color: "#ffffff",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textDecoration: "none",
+        boxShadow: "0 5px 14px rgba(0,0,0,0.06)",
       }}
     >
       {children}
@@ -352,8 +377,8 @@ function SocialButton({
 function FacebookIcon() {
   return (
     <svg
-      width="19"
-      height="19"
+      width="17"
+      height="17"
       viewBox="0 0 24 24"
       fill="currentColor"
     >
@@ -365,8 +390,8 @@ function FacebookIcon() {
 function InstagramIcon() {
   return (
     <svg
-      width="19"
-      height="19"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -400,8 +425,8 @@ function InstagramIcon() {
 function TikTokIcon() {
   return (
     <svg
-      width="19"
-      height="19"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="currentColor"
     >
@@ -413,8 +438,8 @@ function TikTokIcon() {
 function YoutubeIcon() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="19"
+      height="19"
       viewBox="0 0 24 24"
       fill="currentColor"
     >
