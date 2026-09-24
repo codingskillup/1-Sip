@@ -6,6 +6,8 @@ import Products from "@/components/Products";
 import ProductFeatures from "@/components/ProductFeatures";
 import CholistanStory from "@/components/CholistanStory";
 import QualityPurity from "@/components/QualityPurity";
+import BrandPromise from "@/components/BrandPromise";
+import FreshSipCTA from "@/components/FreshSipCTA";
 
 
 export default function Home() {
@@ -19,6 +21,8 @@ export default function Home() {
       <ProductFeatures />
       <CholistanStory />
       <QualityPurity/>
+      <BrandPromise/>
+      <FreshSipCTA/>
     </>
   );
 }
