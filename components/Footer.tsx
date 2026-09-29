@@ -3,26 +3,36 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const C = { ocean: "#005f9e", aqua: "#00b4d8", navy: "#012a4a", white: "#ffffff" };
+const C = {
+  ocean: "#0284c7",
+  oceanDark: "#0369a1",
+  aqua: "#00b4d8",
+  cyanGlow: "#38bdf8",
+  navyDeep: "#041b2f",
+  navyDarker: "#020f1c",
+  textLight: "#f0f9ff",
+  textMuted: "#94a3b8",
+  borderLight: "rgba(255, 255, 255, 0.08)",
+  borderAqua: "rgba(0, 180, 216, 0.25)",
+};
 
-const links = [
+const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Products & Sizes", href: "/products" },
+  { label: "Contact & Order", href: "/contact" },
+];
+
+const bottleSizes = [
+  { size: "500ml Pocket Bottle", desc: "For travel, workouts & daily refresh", href: "/products" },
+  { size: "1.5L Family Bottle", desc: "Ideal for meals & family hydration", href: "/products" },
+  { size: "19L Dispenser Gallon", desc: "For homes, offices & commercial setups", href: "/products" },
 ];
 
 export default function Footer() {
   return (
-    <footer style={{ position: "relative", background: C.navy, overflow: "hidden" }}>
-      {/* Wave top */}
-      <div style={{ height: 52, overflow: "hidden" }}>
-        <svg viewBox="0 0 1440 52" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-          <path d="M0,52 L0,26 C360,6 720,46 1080,21 C1260,11 1380,31 1440,26 L1440,52 Z" fill={C.ocean} />
-        </svg>
-      </div>
-
-      {/* Aqua top accent line */}
+    <footer style={{ position: "relative", background: C.navyDeep, overflow: "hidden", color: C.textLight }}>
+      {/* ── Top Ambient Shimmer Border ── */}
       <div
         style={{
           position: "absolute",
@@ -30,54 +40,160 @@ export default function Footer() {
           left: 0,
           right: 0,
           height: 3,
-          background: `linear-gradient(90deg, ${C.ocean}, ${C.aqua}, ${C.ocean})`,
+          background: `linear-gradient(90deg, transparent 0%, ${C.aqua} 50%, transparent 100%)`,
+          boxShadow: `0 0 16px ${C.aqua}`,
+          zIndex: 10,
         }}
       />
 
-      {/* Glow blobs */}
+      {/* ── Ambient Radial Glows in the Background ── */}
       <div
         style={{
           position: "absolute",
-          right: "-6%",
-          top: "10%",
+          top: "-10%",
+          left: "20%",
           width: 500,
+          height: 400,
+          borderRadius: "50%",
+          background: `radial-gradient(circle, rgba(0, 180, 216, 0.12) 0%, transparent 70%)`,
+          filter: "blur(60px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "5%",
+          width: 600,
           height: 500,
           borderRadius: "50%",
-          background: `radial-gradient(circle, ${C.aqua}10 0%, transparent 68%)`,
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: "-4%",
-          bottom: "5%",
-          width: 380,
-          height: 380,
-          borderRadius: "50%",
-          background: `radial-gradient(circle, ${C.aqua}08 0%, transparent 68%)`,
+          background: `radial-gradient(circle, rgba(2, 132, 199, 0.1) 0%, transparent 70%)`,
+          filter: "blur(80px)",
           pointerEvents: "none",
         }}
       />
 
+      {/* ── Pre-Footer Floating CTA Card ── */}
+      <div
+        style={{
+          width: "min(93%, 1280px)",
+          margin: "0 auto",
+          paddingTop: 48,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            background: "linear-gradient(135deg, rgba(2, 132, 199, 0.22) 0%, rgba(4, 27, 47, 0.95) 100%)",
+            border: `1px solid ${C.borderAqua}`,
+            borderRadius: 20,
+            padding: "36px 40px",
+            boxShadow: "0 20px 48px rgba(0, 0, 0, 0.35)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 24,
+          }}
+        >
+          <div style={{ maxWidth: 580 }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(0, 180, 216, 0.15)",
+                border: "1px solid rgba(0, 180, 216, 0.35)",
+                padding: "4px 14px",
+                borderRadius: 20,
+                fontSize: 12,
+                fontWeight: 700,
+                color: C.aqua,
+                textTransform: "uppercase",
+                letterSpacing: 1,
+                marginBottom: 12,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#25d366" }} />
+              Fresh Batches Dispatched Daily
+            </div>
+            <h3 style={{ margin: "0 0 8px", fontSize: "clamp(22px, 3vw, 30px)", fontWeight: 800, color: "#ffffff", letterSpacing: -0.5 }}>
+              Ready to Taste Nature in Every Sip?
+            </h3>
+            <p style={{ margin: 0, fontSize: 14.5, color: "#cbd5e1", lineHeight: 1.6 }}>
+              Order genuine 1 Sip Natural Water for homes, offices, schools, and corporate events across Fort Abbas & Punjab.
+            </p>
+          </div>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+            <Link
+              href="https://wa.me/923126016060?text=Hello%201%20Sip,%20I%20would%20like%20to%20order%20water%20bottles."
+              target="_blank"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 9,
+                padding: "13px 26px",
+                borderRadius: 12,
+                background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                color: "#ffffff",
+                fontSize: 14.5,
+                fontWeight: 700,
+                textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(16, 185, 129, 0.35)",
+                transition: "transform 0.2s ease",
+              }}
+            >
+              <WhatsAppSVG />
+              <span>Order on WhatsApp</span>
+            </Link>
+
+            <Link
+              href="tel:+923126016060"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "13px 22px",
+                borderRadius: 12,
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.18)",
+                color: "#ffffff",
+                fontSize: 14.5,
+                fontWeight: 600,
+                textDecoration: "none",
+                transition: "background 0.2s ease",
+              }}
+            >
+              <span>📞 0312 6016060</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main Footer Grid ── */}
       <div
         style={{
           position: "relative",
           zIndex: 2,
-          width: "min(93%, 1480px)",
+          width: "min(93%, 1280px)",
           margin: "0 auto",
-          padding: "52px 0 30px",
+          padding: "60px 0 36px",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.5fr 1fr 1fr",
-            gap: 52,
-            marginBottom: 44,
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 40,
+            marginBottom: 50,
           }}
         >
-          {/* Brand */}
+          {/* Column 1: Brand Info */}
           <div>
             <Link
               href="/"
@@ -91,169 +207,300 @@ export default function Footer() {
             >
               <div
                 style={{
-                  width: 50,
-                  height: 50,
+                  width: 52,
+                  height: 52,
                   borderRadius: "50%",
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1.5px solid rgba(255,255,255,0.16)",
+                  background: "radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, rgba(2, 132, 199, 0.05) 100%)",
+                  border: "1.5px solid rgba(0, 180, 216, 0.4)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  overflow: "hidden",
+                  boxShadow: "0 0 20px rgba(0, 180, 216, 0.25)",
                 }}
               >
-                <Image src="/images/oneSipLogo.png" alt="1 Sip" width={46} height={46} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                <Image
+                  src="/images/oneSipLogo.png"
+                  alt="1 Sip Logo"
+                  width={46}
+                  height={46}
+                  style={{ width: "90%", height: "90%", objectFit: "contain" }}
+                />
               </div>
               <div>
-                <div style={{ color: C.white, fontSize: 18, fontWeight: 800, lineHeight: 1.1 }}>1 Sip</div>
-                <div style={{ color: C.aqua, fontSize: 10.5, letterSpacing: 1, textTransform: "uppercase", fontWeight: 600 }}>
-                  Natural Water
+                <div style={{ color: "#ffffff", fontSize: 19, fontWeight: 900, lineHeight: 1.1, letterSpacing: -0.5 }}>
+                  1 Sip
+                </div>
+                <div style={{ color: C.aqua, fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", fontWeight: 700 }}>
+                  Natural Mineral Water
                 </div>
               </div>
             </Link>
-            <p style={{ color: "rgba(255,255,255,0.42)", fontSize: 14, lineHeight: 1.75, maxWidth: 300, margin: "0 0 22px" }}>
-              Pure water inspired by the golden landscapes of Cholistan —
-              made for everyday refreshment, home, office and travel.
-            </p>
-            {/* Tagline */}
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "7px 16px",
-                borderRadius: 6,
-                background: `${C.aqua}18`,
-                border: `1px solid ${C.aqua}30`,
-                color: C.aqua,
-                fontSize: 12,
-                fontWeight: 700,
-                fontStyle: "italic",
-              }}
-            >
-              💧 Nature in Every Sip
-            </div>
 
-            {/* Social icons */}
-            <div style={{ display: "flex", gap: 9, marginTop: 18 }}>
+            <p style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.7, margin: "0 0 20px", maxWidth: 300 }}>
+              Rooted in the pristine essence of Cholistan — delivering clean, refreshing, and scientifically balanced drinking water to homes and workplaces.
+            </p>
+
+            {/* Purity Verification Pills */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {[
-                { l: "FB", col: "#1877f2" },
-                { l: "IG", col: "#e1306c" },
-                { l: "TT", col: "#ffffff" },
-                { l: "YT", col: "#ff4444" },
-              ].map((s) => (
-                <Link
-                  key={s.l}
-                  href="#"
-                  title={s.l}
+                { icon: "💧", text: "Multi-Stage RO & UV Purification" },
+                { icon: "🛡️", text: "Food-Grade BPA-Free Bottling" },
+                { icon: "🌿", text: "Naturally Balanced Mineral Content" },
+              ].map((b) => (
+                <div
+                  key={b.text}
                   style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: "50%",
-                    background: `${s.col}18`,
-                    border: `1px solid ${s.col}30`,
-                    display: "flex",
+                    display: "inline-flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    color: s.col,
-                    textDecoration: "none",
-                    fontSize: 11,
-                    fontWeight: 800,
+                    gap: 8,
+                    fontSize: 12.5,
+                    color: "#cbd5e1",
+                    background: "rgba(255, 255, 255, 0.04)",
+                    padding: "5px 10px",
+                    borderRadius: 6,
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
                   }}
                 >
-                  {s.l}
-                </Link>
+                  <span>{b.icon}</span>
+                  <span>{b.text}</span>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Column 2: Quick Navigation */}
           <div>
-            <div style={{ color: `${C.aqua}70`, fontSize: 10.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.8, marginBottom: 18 }}>
-              Navigation
+            <div
+              style={{
+                color: C.aqua,
+                fontSize: 12,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 1.5,
+                marginBottom: 20,
+              }}
+            >
+              Explore 1 Sip
             </div>
-            <nav style={{ display: "flex", flexDirection: "column", gap: 11 }}>
-              {links.map((l) => (
+            <nav style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {navLinks.map((link) => (
                 <Link
-                  key={l.href}
-                  href={l.href}
-                  style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: "#cbd5e1",
+                    textDecoration: "none",
+                    fontSize: 14.5,
+                    fontWeight: 500,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    transition: "all 0.2s ease",
+                  }}
                 >
-                  {l.label}
+                  <span style={{ color: C.aqua, fontSize: 12 }}>›</span>
+                  <span>{link.label}</span>
                 </Link>
               ))}
             </nav>
+
+            <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+              <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 8 }}>Parent Organization</div>
+              <div style={{ color: "#ffffff", fontSize: 14, fontWeight: 700 }}>
+                🏢 Mian Rayan Traders
+              </div>
+            </div>
           </div>
 
-          {/* Contact */}
+          {/* Column 3: Products */}
           <div>
-            <div style={{ color: `${C.aqua}70`, fontSize: 10.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.8, marginBottom: 18 }}>
-              Contact
+            <div
+              style={{
+                color: C.aqua,
+                fontSize: 12,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 1.5,
+                marginBottom: 20,
+              }}
+            >
+              Bottle Sizes
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
-              {[
-                { icon: "📍", text: "Commercial Market, Ahmed Garden, Fort Abbas" },
-                { icon: "☎", text: "0312 6016060" },
-                { icon: "🏢", text: "Mian Rayan Traders" },
-              ].map((item) => (
-                <div key={item.text} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{item.icon}</span>
-                  <span style={{ color: "rgba(255,255,255,0.42)", fontSize: 13, lineHeight: 1.55 }}>{item.text}</span>
-                </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {bottleSizes.map((b) => (
+                <Link
+                  key={b.size}
+                  href={b.href}
+                  style={{
+                    textDecoration: "none",
+                    padding: "10px 14px",
+                    borderRadius: 10,
+                    background: "rgba(255, 255, 255, 0.03)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    transition: "background 0.2s ease",
+                  }}
+                >
+                  <div style={{ color: "#ffffff", fontSize: 14, fontWeight: 700 }}>{b.size}</div>
+                  <div style={{ color: "#94a3b8", fontSize: 12, marginTop: 2 }}>{b.desc}</div>
+                </Link>
               ))}
-              <Link
-                href="https://wa.me/923126016060"
-                target="_blank"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 7,
-                  padding: "9px 16px",
-                  borderRadius: 7,
-                  background: "#25d36618",
-                  border: "1px solid #25d36630",
-                  color: "#4cd88a",
-                  textDecoration: "none",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  marginTop: 4,
-                }}
-              >
-                💬 WhatsApp Order
-              </Link>
+            </div>
+          </div>
+
+          {/* Column 4: Contact & Socials */}
+          <div>
+            <div
+              style={{
+                color: C.aqua,
+                fontSize: 12,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 1.5,
+                marginBottom: 20,
+              }}
+            >
+              Plant & Depot Contact
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ fontSize: 16, flexShrink: 0 }}>📍</span>
+                <span style={{ color: "#cbd5e1", fontSize: 13.5, lineHeight: 1.5 }}>
+                  Commercial Market, Ahmed Garden, Fort Abbas, Punjab, Pakistan
+                </span>
+              </div>
+
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <span style={{ fontSize: 16, flexShrink: 0 }}>☎️</span>
+                <Link
+                  href="tel:+923126016060"
+                  style={{ color: "#ffffff", fontSize: 14.5, fontWeight: 700, textDecoration: "none" }}
+                >
+                  0312 6016060
+                </Link>
+              </div>
+
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <span style={{ fontSize: 16, flexShrink: 0 }}>🕒</span>
+                <span style={{ color: "#cbd5e1", fontSize: 13 }}>
+                  Mon – Sun: 8:00 AM – 10:00 PM
+                </span>
+              </div>
+
+              {/* Social Media Links */}
+              <div style={{ marginTop: 10 }}>
+                <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 10, fontWeight: 600 }}>
+                  Follow Us Online:
+                </div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  {[
+                    { label: "Facebook", col: "#1877f2", icon: <FacebookSVG /> },
+                    { label: "Instagram", col: "#e1306c", icon: <InstagramSVG /> },
+                    { label: "TikTok", col: "#00f2fe", icon: <TikTokSVG /> },
+                    { label: "YouTube", col: "#ff0000", icon: <YoutubeSVG /> },
+                  ].map((s) => (
+                    <Link
+                      key={s.label}
+                      href="#"
+                      title={s.label}
+                      style={{
+                        width: 38,
+                        height: 38,
+                        borderRadius: "50%",
+                        background: "rgba(255, 255, 255, 0.06)",
+                        border: "1px solid rgba(255, 255, 255, 0.12)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#ffffff",
+                        textDecoration: "none",
+                        transition: "all 0.2s ease",
+                      }}
+                    >
+                      {s.icon}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* ── Bottom Copyright Bar ── */}
         <div
           style={{
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            paddingTop: 22,
+            borderTop: `1px solid ${C.borderLight}`,
+            paddingTop: 26,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: 10,
+            gap: 14,
           }}
         >
-          <span style={{ color: "rgba(255,255,255,0.20)", fontSize: 12 }}>
-            © {new Date().getFullYear()} 1 Sip Natural Water · Mian Rayan Traders · All rights reserved.
-          </span>
-          <span
+          <div style={{ color: "#94a3b8", fontSize: 13 }}>
+            © {new Date().getFullYear()} 1 Sip Natural Mineral Water. Produced & distributed by Mian Rayan Traders.
+          </div>
+
+          <div
             style={{
-              backgroundImage: `linear-gradient(90deg, ${C.aqua}, ${C.ocean})`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              fontSize: 12,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 13,
               fontWeight: 700,
+              color: C.aqua,
             }}
           >
-            Pure · Fresh · Natural
-          </span>
+            <span>Pure Nature in Every Sip</span>
+            <span style={{ color: "#94a3b8" }}>·</span>
+            <span>Proudly Pakistani 🇵🇰</span>
+          </div>
         </div>
       </div>
     </footer>
+  );
+}
+
+function WhatsAppSVG() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 2C6.496 2 2 6.5 2 12.043c0 1.933.548 3.738 1.498 5.277L2 22l4.828-1.464a9.972 9.972 0 0 0 5.203 1.464c5.534 0 10.03-4.5 10.03-10.043C22.062 6.5 17.565 2 12.031 2zm5.792 14.28c-.244.686-1.22 1.258-1.996 1.424-.53.112-1.224.202-3.555-.764-2.983-1.238-4.908-4.28-5.056-4.478-.149-.197-1.205-1.604-1.205-3.058 0-1.455.76-2.171 1.03-2.464.27-.294.593-.367.791-.367.199 0 .398.002.571.011.185.009.432-.07.674.512.248.597.843 2.057.917 2.207.074.15.124.326.025.524-.099.198-.149.322-.297.495-.149.174-.313.388-.447.521-.148.148-.303.31-.13.608.173.297.771 1.272 1.654 2.058 1.135 1.011 2.091 1.324 2.389 1.472.297.149.471.124.645-.074.173-.198.743-.866.941-1.163.198-.297.397-.248.67-.149.272.099 1.732.817 2.03.966.297.148.496.223.57.347.074.124.074.72-.17 1.406z" />
+    </svg>
+  );
+}
+
+function FacebookSVG() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13.5 22V13.5H16.4L16.8 10.2H13.5V8.1C13.5 7.1 13.8 6.5 15.2 6.5H17V3.5C16.7 3.4 15.6 3.3 14.4 3.3C11.8 3.3 10.1 4.8 10.1 7.8V10.2H7.2V13.5H10.1V22H13.5Z" />
+    </svg>
+  );
+}
+
+function InstagramSVG() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function TikTokSVG() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M15.2 3C15.5 5.2 16.7 6.5 19 6.7V9.6C17.6 9.7 16.3 9.3 15.2 8.5V14.3C15.2 18 12.7 21 9.1 21C5.8 21 3 18.4 3 15C3 11.3 6 8.7 9.9 9V12C8.2 11.7 6.1 12.7 6.1 15C6.1 16.7 7.4 18 9.1 18C11.2 18 12.2 16.3 12.2 14.3V3H15.2Z" />
+    </svg>
+  );
+}
+
+function YoutubeSVG() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 12C22 9.8 21.8 8.4 21.6 7.7C21.4 6.9 20.8 6.3 20 6.1C18.6 5.7 12 5.7 12 5.7C12 5.7 5.4 5.7 4 6.1C3.2 6.3 2.6 6.9 2.4 7.7C2.2 8.4 2 9.8 2 12C2 14.2 2.2 15.6 2.4 16.3C2.6 17.1 3.2 17.7 4 17.9C5.4 18.3 12 18.3 12 18.3C12 18.3 18.6 18.3 20 17.9C20.8 17.7 21.4 17.1 21.6 16.3C21.8 15.6 22 14.2 22 12Z" />
+      <path d="M10 9L16 12L10 15V9Z" fill="white" />
+    </svg>
   );
 }

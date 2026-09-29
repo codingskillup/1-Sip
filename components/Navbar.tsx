@@ -5,20 +5,21 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-// ── Water brand colors ──────────────────────────────────────
 const C = {
-  ocean: "#005f9e",
+  ocean: "#0284c7",
+  oceanDark: "#0369a1",
   aqua: "#00b4d8",
-  navy: "#012a4a",
-  skyBg: "#e8f6fb",
+  navy: "#0c2340",
+  textMuted: "#475569",
   white: "#ffffff",
+  borderLight: "rgba(2, 132, 199, 0.12)",
 };
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact & Order", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -39,23 +40,25 @@ export default function Navbar() {
     const handleScroll = () => {
       if (!ticking.current) {
         requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 50);
+          setScrolled(window.scrollY > 25);
           ticking.current = false;
         });
         ticking.current = true;
       }
     };
-    setScrolled(window.scrollY > 50);
+    setScrolled(window.scrollY > 25);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
-  const navH = mobile ? 62 : 76;
+  const navH = mobile ? 66 : 78;
 
   return (
     <>
@@ -67,17 +70,15 @@ export default function Navbar() {
           right: 0,
           zIndex: 1000,
           height: navH,
-          willChange: "background, box-shadow",
-          background: scrolled ? C.white : "rgba(255,255,255,0.95)",
-          backdropFilter: scrolled ? "none" : "blur(20px)",
-          WebkitBackdropFilter: scrolled ? "none" : "blur(20px)",
-          borderBottom: `1px solid ${scrolled ? "rgba(0,95,158,0.12)" : "rgba(0,95,158,0.06)"}`,
-          boxShadow: scrolled ? "0 2px 24px rgba(0,95,158,0.09)" : "none",
-          transition:
-            "background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+          background: scrolled ? "rgba(255, 255, 255, 0.94)" : "rgba(255, 255, 255, 0.82)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: `1px solid ${scrolled ? "rgba(2, 132, 199, 0.14)" : "rgba(2, 132, 199, 0.08)"}`,
+          boxShadow: scrolled ? "0 8px 30px rgba(2, 132, 199, 0.08)" : "none",
+          transition: "all 0.25s ease",
         }}
       >
-        {/* Top aqua line (always visible) */}
+        {/* Top Water Gradient Bar */}
         <div
           style={{
             position: "absolute",
@@ -85,17 +86,18 @@ export default function Navbar() {
             left: 0,
             right: 0,
             height: 3,
-            background: `linear-gradient(90deg, ${C.ocean}, ${C.aqua}, ${C.ocean})`,
+            background: `linear-gradient(90deg, #0284c7 0%, #00b4d8 50%, #38bdf8 100%)`,
           }}
         />
 
         <div
           style={{
-            width: "min(93%, 1480px)",
+            width: "min(93%, 1280px)",
             height: "100%",
             margin: "0 auto",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           {/* Logo */}
@@ -104,59 +106,75 @@ export default function Navbar() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: 12,
               textDecoration: "none",
               flexShrink: 0,
             }}
             onClick={() => setMenuOpen(false)}
           >
-            <Image
-              src="/images/oneSipLogo.png"
-              alt="1 Sip Natural Water"
-              width={50}
-              height={50}
-              priority
+            <div
               style={{
                 width: mobile ? 44 : 50,
                 height: mobile ? 44 : 50,
-                objectFit: "contain",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(0, 180, 216, 0.15) 0%, rgba(2, 132, 199, 0.05) 100%)",
+                border: "1.5px solid rgba(0, 180, 216, 0.3)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 10px rgba(0, 180, 216, 0.15)",
               }}
-            />
-            {!mobile && (
-              <div>
-                <div
-                  style={{
-                    color: C.ocean,
-                    fontSize: 15,
-                    fontWeight: 800,
-                    lineHeight: 1.1,
-                  }}
-                >
-                  1 Sip
-                </div>
-                <div
-                  style={{
-                    color: C.aqua,
-                    fontSize: 10,
-                    fontWeight: 600,
-                    letterSpacing: 1,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Natural Water
-                </div>
+            >
+              <Image
+                src="/images/oneSipLogo.png"
+                alt="1 Sip Natural Water"
+                width={46}
+                height={46}
+                priority
+                style={{
+                  width: "88%",
+                  height: "88%",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+            <div>
+              <div
+                style={{
+                  color: C.navy,
+                  fontSize: mobile ? 16 : 18,
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  letterSpacing: -0.5,
+                }}
+              >
+                1 Sip
               </div>
-            )}
+              <div
+                style={{
+                  color: C.ocean,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: 1.2,
+                  textTransform: "uppercase",
+                }}
+              >
+                Natural Mineral Water
+              </div>
+            </div>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop Navigation */}
           {!mobile && (
             <nav
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 2,
-                marginLeft: 44,
+                gap: 6,
+                background: "rgba(2, 132, 199, 0.04)",
+                padding: "4px 8px",
+                borderRadius: 30,
+                border: "1px solid rgba(2, 132, 199, 0.08)",
               }}
             >
               {navLinks.map((link) => {
@@ -167,91 +185,79 @@ export default function Navbar() {
                     href={link.href}
                     style={{
                       position: "relative",
-                      padding: "8px 17px",
-                      borderRadius: 8,
+                      padding: "8px 18px",
+                      borderRadius: 24,
                       textDecoration: "none",
-                      fontSize: 14.5,
+                      fontSize: 14,
                       fontWeight: isActive ? 700 : 500,
-                      color: isActive ? C.ocean : "#3d6580",
-                      background: isActive
-                        ? "rgba(0,95,158,0.07)"
-                        : "transparent",
-                      transition: "all 0.18s ease",
+                      color: isActive ? "#ffffff" : C.textMuted,
+                      background: isActive ? "linear-gradient(135deg, #0284c7 0%, #00b4d8 100%)" : "transparent",
+                      boxShadow: isActive ? "0 4px 14px rgba(2, 132, 199, 0.25)" : "none",
+                      transition: "all 0.2s ease",
                     }}
                   >
                     {link.label}
-                    {isActive && (
-                      <span
-                        style={{
-                          position: "absolute",
-                          bottom: 3,
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          width: 22,
-                          height: 2.5,
-                          borderRadius: 10,
-                          background: `linear-gradient(90deg, ${C.ocean}, ${C.aqua})`,
-                        }}
-                      />
-                    )}
                   </Link>
                 );
               })}
             </nav>
           )}
 
-          {/* Desktop right */}
+          {/* Desktop Right Actions */}
           {!mobile && (
-            <div
-              style={{
-                marginLeft: "auto",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
-              {/* Social icons */}
-              <SocialBtn href="#" title="Facebook" col="#1877f2"><FacebookSVG /></SocialBtn>
-              <SocialBtn href="#" title="Instagram" col="#e1306c"><InstagramSVG /></SocialBtn>
-              <SocialBtn href="#" title="TikTok" col="#010101"><TikTokSVG /></SocialBtn>
-              <SocialBtn href="#" title="YouTube" col="#ff0000"><YoutubeSVG /></SocialBtn>
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <Link
+                href="tel:+923126016060"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  color: C.navy,
+                  fontSize: 13.5,
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  padding: "8px 14px",
+                  borderRadius: 10,
+                  background: "rgba(2, 132, 199, 0.06)",
+                }}
+              >
+                <span>📞</span>
+                <span>0312 6016060</span>
+              </Link>
 
-              {/* CTA */}
               <Link
                 href="/contact"
                 style={{
-                  marginLeft: 10,
                   padding: "10px 22px",
-                  borderRadius: 8,
-                  background: C.ocean,
-                  color: C.white,
+                  borderRadius: 10,
+                  background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
+                  color: "#ffffff",
                   fontWeight: 700,
                   fontSize: 13.5,
                   textDecoration: "none",
-                  boxShadow: "0 4px 16px rgba(0,95,158,0.28)",
+                  boxShadow: "0 6px 20px rgba(2, 132, 199, 0.3)",
                   letterSpacing: 0.2,
                   whiteSpace: "nowrap",
-                  transition: "background 0.18s ease",
+                  transition: "transform 0.18s ease, box-shadow 0.18s ease",
                 }}
               >
-                Order Now
+                Order Bottles →
               </Link>
             </div>
           )}
 
-          {/* Mobile hamburger */}
+          {/* Mobile Hamburger */}
           {mobile && (
             <button
               type="button"
               aria-label="Toggle menu"
               onClick={() => setMenuOpen((v) => !v)}
               style={{
-                marginLeft: "auto",
-                width: 42,
-                height: 42,
-                borderRadius: 8,
-                border: `1px solid rgba(0,95,158,0.14)`,
-                background: "rgba(0,95,158,0.05)",
+                width: 44,
+                height: 44,
+                borderRadius: 10,
+                border: "1px solid rgba(2, 132, 199, 0.18)",
+                background: "rgba(2, 132, 199, 0.06)",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
@@ -261,12 +267,12 @@ export default function Navbar() {
               }}
             >
               {menuOpen ? (
-                <span style={{ color: C.ocean, fontSize: 20, lineHeight: 1 }}>✕</span>
+                <span style={{ color: C.ocean, fontSize: 22, lineHeight: 1 }}>✕</span>
               ) : (
                 <>
-                  <span style={{ width: 20, height: 2, background: C.ocean, borderRadius: 2 }} />
-                  <span style={{ width: 14, height: 2, background: C.aqua, borderRadius: 2 }} />
-                  <span style={{ width: 20, height: 2, background: C.ocean, borderRadius: 2 }} />
+                  <span style={{ width: 22, height: 2.5, background: C.ocean, borderRadius: 2 }} />
+                  <span style={{ width: 16, height: 2.5, background: C.aqua, borderRadius: 2 }} />
+                  <span style={{ width: 22, height: 2.5, background: C.ocean, borderRadius: 2 }} />
                 </>
               )}
             </button>
@@ -274,10 +280,10 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Height spacer */}
+      {/* Spacer to prevent layout shift */}
       <div style={{ height: navH, flexShrink: 0 }} />
 
-      {/* Mobile menu */}
+      {/* Mobile Drawer Menu */}
       {mobile && menuOpen && (
         <div
           onClick={() => setMenuOpen(false)}
@@ -288,20 +294,20 @@ export default function Navbar() {
             right: 0,
             bottom: 0,
             zIndex: 999,
-            background: "rgba(0,42,74,0.35)",
-            backdropFilter: "blur(6px)",
+            background: "rgba(4, 27, 47, 0.4)",
+            backdropFilter: "blur(10px)",
           }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: C.white,
+              background: "#ffffff",
               borderBottom: `3px solid ${C.aqua}`,
-              padding: "18px 5% 24px",
-              boxShadow: "0 16px 48px rgba(0,95,158,0.14)",
+              padding: "20px 6% 28px",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
             }}
           >
-            <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -310,14 +316,13 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     style={{
-                      padding: "14px 16px",
-                      borderRadius: 8,
+                      padding: "14px 18px",
+                      borderRadius: 10,
                       textDecoration: "none",
-                      fontSize: 15.5,
+                      fontSize: 16,
                       fontWeight: isActive ? 700 : 500,
-                      color: isActive ? C.ocean : "#3d6580",
-                      background: isActive ? "rgba(0,95,158,0.07)" : "transparent",
-                      borderLeft: isActive ? `3px solid ${C.aqua}` : "3px solid transparent",
+                      color: isActive ? "#ffffff" : C.navy,
+                      background: isActive ? "linear-gradient(135deg, #0284c7 0%, #00b4d8 100%)" : "rgba(2, 132, 199, 0.04)",
                     }}
                   >
                     {link.label}
@@ -325,80 +330,66 @@ export default function Navbar() {
                 );
               })}
             </nav>
-            <div
-              style={{
-                display: "flex",
-                gap: 8,
-                marginTop: 18,
-                paddingTop: 16,
-                borderTop: "1px solid rgba(0,95,158,0.08)",
-              }}
-            >
-              <SocialBtn href="#" title="Facebook" col="#1877f2"><FacebookSVG /></SocialBtn>
-              <SocialBtn href="#" title="Instagram" col="#e1306c"><InstagramSVG /></SocialBtn>
-              <SocialBtn href="#" title="TikTok" col="#010101"><TikTokSVG /></SocialBtn>
-              <SocialBtn href="#" title="YouTube" col="#ff0000"><YoutubeSVG /></SocialBtn>
+
+            <div style={{ marginTop: 18, paddingTop: 16, borderTop: "1px solid rgba(2, 132, 199, 0.1)" }}>
+              <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+                <Link
+                  href="tel:+923126016060"
+                  style={{
+                    flex: 1,
+                    textAlign: "center",
+                    padding: "12px",
+                    borderRadius: 10,
+                    background: "rgba(2, 132, 199, 0.08)",
+                    color: C.navy,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: "none",
+                  }}
+                >
+                  📞 Call Hotline
+                </Link>
+                <Link
+                  href="https://wa.me/923126016060"
+                  target="_blank"
+                  style={{
+                    flex: 1,
+                    textAlign: "center",
+                    padding: "12px",
+                    borderRadius: 10,
+                    background: "#25d366",
+                    color: "#ffffff",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: "none",
+                  }}
+                >
+                  💬 WhatsApp
+                </Link>
+              </div>
+
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: "block",
+                  padding: "14px",
+                  borderRadius: 10,
+                  background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
+                  color: "#ffffff",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  textDecoration: "none",
+                  textAlign: "center",
+                  boxShadow: "0 6px 20px rgba(2, 132, 199, 0.28)",
+                }}
+              >
+                Order Bottles Now
+              </Link>
             </div>
-            <Link
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                display: "block",
-                marginTop: 12,
-                padding: "14px",
-                borderRadius: 8,
-                background: C.ocean,
-                color: C.white,
-                fontWeight: 700,
-                fontSize: 15,
-                textDecoration: "none",
-                textAlign: "center",
-                boxShadow: "0 4px 16px rgba(0,95,158,0.25)",
-              }}
-            >
-              Order Now
-            </Link>
           </div>
         </div>
       )}
     </>
   );
-}
-
-function SocialBtn({ href, title, col, children }: { href: string; title: string; col: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      target="_blank"
-      title={title}
-      style={{
-        width: 34,
-        height: 34,
-        borderRadius: "50%",
-        background: `${col}12`,
-        border: `1px solid ${col}28`,
-        color: col,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        textDecoration: "none",
-        flexShrink: 0,
-      }}
-    >
-      {children}
-    </Link>
-  );
-}
-
-function FacebookSVG() {
-  return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22V13.5H16.4L16.8 10.2H13.5V8.1C13.5 7.1 13.8 6.5 15.2 6.5H17V3.5C16.7 3.4 15.6 3.3 14.4 3.3C11.8 3.3 10.1 4.8 10.1 7.8V10.2H7.2V13.5H10.1V22H13.5Z" /></svg>;
-}
-function InstagramSVG() {
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
-}
-function TikTokSVG() {
-  return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M15.2 3C15.5 5.2 16.7 6.5 19 6.7V9.6C17.6 9.7 16.3 9.3 15.2 8.5V14.3C15.2 18 12.7 21 9.1 21C5.8 21 3 18.4 3 15C3 11.3 6 8.7 9.9 9V12C8.2 11.7 6.1 12.7 6.1 15C6.1 16.7 7.4 18 9.1 18C11.2 18 12.2 16.3 12.2 14.3V3H15.2Z" /></svg>;
-}
-function YoutubeSVG() {
-  return <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12C22 9.8 21.8 8.4 21.6 7.7C21.4 6.9 20.8 6.3 20 6.1C18.6 5.7 12 5.7 12 5.7C12 5.7 5.4 5.7 4 6.1C3.2 6.3 2.6 6.9 2.4 7.7C2.2 8.4 2 9.8 2 12C2 14.2 2.2 15.6 2.4 16.3C2.6 17.1 3.2 17.7 4 17.9C5.4 18.3 12 18.3 12 18.3C12 18.3 18.6 18.3 20 17.9C20.8 17.7 21.4 17.1 21.6 16.3C21.8 15.6 22 14.2 22 12Z" /><path d="M10 9L16 12L10 15V9Z" fill="white" /></svg>;
 }

@@ -4,205 +4,218 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// ── Water brand palette ────────────────────────────────────
 const C = {
-  ocean: "#005f9e",
+  ocean: "#0284c7",
+  oceanDark: "#0369a1",
   aqua: "#00b4d8",
-  navy: "#012a4a",
-  sky: "#e8f6fb",
-  skyMid: "#c8eaf5",
+  cyan: "#06b6d4",
+  navy: "#0c2340",
+  slate: "#475569",
+  lightSky: "#f0f9ff",
+  iceGlow: "#e0f2fe",
   white: "#ffffff",
-  textSub: "#3d6580",
-  textMuted: "#7fa8be",
+  borderLight: "rgba(2, 132, 199, 0.12)",
 };
-
-const WaveDivider = ({ flip = false, from = C.sky, to = C.white }: { flip?: boolean; from?: string; to?: string }) => (
-  <div
-    style={{
-      position: "relative",
-      height: 70,
-      overflow: "hidden",
-      background: flip ? to : from,
-      flexShrink: 0,
-    }}
-  >
-    <svg
-      viewBox="0 0 1440 70"
-      preserveAspectRatio="none"
-      style={{ position: "absolute", bottom: 0, width: "100%", height: "100%" }}
-    >
-      <path
-        d={
-          flip
-            ? "M0,70 L0,35 C240,65 480,5 720,35 C960,65 1200,5 1440,35 L1440,70 Z"
-            : "M0,0 L0,35 C240,5 480,65 720,35 C960,5 1200,65 1440,35 L1440,0 Z"
-        }
-        fill={flip ? from : to}
-      />
-    </svg>
-  </div>
-);
 
 const stats = [
   { value: "100%", label: "Pure Natural Water", icon: "💧" },
-  { value: "3", label: "Bottle Sizes", icon: "🫙" },
-  { value: "Zero", label: "Additives", icon: "✅" },
-  { value: "PK", label: "Made in Pakistan", icon: "🇵🇰" },
+  { value: "7+", label: "Filtration Stages", icon: "🔬" },
+  { value: "3", label: "Convenient Sizes", icon: "🫙" },
+  { value: "0", label: "Chemical Additives", icon: "🌱" },
 ];
 
-const whyItems = [
-  { icon: "💧", title: "Crystal Pure", desc: "No additives or artificial flavors — just naturally fresh, clean water.", accent: C.aqua },
-  { icon: "🌊", title: "Nature Sourced", desc: "Inspired by the landscapes and natural beauty of Cholistan, Pakistan.", accent: C.ocean },
-  { icon: "🛡️", title: "Quality Assured", desc: "Careful handling at every step — source, treatment, bottling, storage.", accent: "#0077b6" },
-  { icon: "🇵🇰", title: "Proudly Local", desc: "A Pakistani brand made for Pakistani homes, offices and lives.", accent: "#0096c7" },
+const whyFeatures = [
+  {
+    icon: "💧",
+    title: "Crystal Pure & Pristine",
+    desc: "Every drop undergoes multi-barrier RO, micro-filtration and UV disinfection, ensuring 100% clean drinking water.",
+    badge: "Laboratory Tested",
+  },
+  {
+    icon: "🏜️",
+    title: "Cholistan Heart & Heritage",
+    desc: "Drawing inspiration from the legendary desert landscapes, providing cool, rejuvenating hydration to the arid plains.",
+    badge: "Local Identity",
+  },
+  {
+    icon: "🛡️",
+    title: "BPA-Free Food Grade Bottling",
+    desc: "Hygienically washed, hermetically sealed, and packaged under sterile clinical conditions for your family's safety.",
+    badge: "100% Safe",
+  },
+  {
+    icon: "⚡",
+    title: "Fast Office & Home Supply",
+    desc: "Direct deliveries of 19L dispenser bottles and cartons for residences, commercial clinics, and corporate offices.",
+    badge: "Active Delivery",
+  },
 ];
 
 const products = [
-  { size: "500ml", use: "Travel & Daily", desc: "Light and convenient for on-the-go refreshment every day.", col: C.aqua },
-  { size: "1.5L", use: "Home & Family", desc: "Ideal for the dinner table and daily family hydration needs.", col: C.ocean },
-  { size: "19L", use: "Home & Office", desc: "The smart dispenser choice for home or office — always fresh.", col: "#0077b6" },
+  {
+    size: "500ml",
+    title: "On-the-Go Refreshment",
+    ideal: "Travel, Fitness, Commuting & Cars",
+    desc: "Ergonomically designed pocket bottle that slips into bags, gym holders, and cup racks. Clean hydration on the move.",
+    color: "#0284c7",
+  },
+  {
+    size: "1.5L",
+    title: "Family Dining Essential",
+    ideal: "Home Dining, Guests & Kitchen",
+    desc: "The classic family table companion. Ample volume for shared family meals, guest hospitality, and daily domestic hydration.",
+    color: "#00b4d8",
+  },
+  {
+    size: "19L",
+    title: "Commercial & Home Dispenser",
+    ideal: "Offices, Clinics, Schools & Homes",
+    desc: "Sturdy food-grade gallon bottle designed for standard water coolers and electric dispensers. Economic and always ready.",
+    color: "#0369a1",
+  },
 ];
 
-const qualitySteps = [
-  { num: "01", icon: "🌊", title: "Source Protection", col: C.ocean },
-  { num: "02", icon: "🔬", title: "Water Treatment", col: C.aqua },
-  { num: "03", icon: "🫙", title: "Safe Bottling", col: "#0077b6" },
-  { num: "04", icon: "📦", title: "Hygienic Storage", col: "#0096c7" },
+const puritySteps = [
+  { step: "01", title: "Source Extraction", desc: "Sourced from protected subterranean aquifers beneath pristine natural soil strata." },
+  { step: "02", title: "Multi-Sand & Carbon Filter", desc: "Removes particulate matter, organic impurities, and clarifies natural transparency." },
+  { step: "03", title: "Reverse Osmosis (RO)", desc: "Reduces unwanted salts and heavy ions to optimal WHO drinking water standards." },
+  { step: "04", title: "UV & Ozone Sterilization", desc: "Double safety barrier eliminates 99.9% of microbial life without adding chemicals." },
 ];
 
-const testimonials = [
-  { text: "Best natural water in Pakistan. Refreshing and clean every single time!", name: "Ahmed K.", city: "Lahore" },
-  { text: "We switched our office to 1 Sip 19L dispensers — the whole team loves it.", name: "Sara M.", city: "Karachi" },
-  { text: "The 500ml is my go-to for daily commuting. So fresh and light.", name: "Bilal R.", city: "Islamabad" },
+const reviews = [
+  {
+    name: "Dr. Hamza Tariq",
+    role: "Fort Abbas Medical Clinic",
+    comment: "We order 1 Sip 19L dispenser bottles for our patient waiting area and staff. Crisp, refreshing taste with zero unpleasant odor.",
+    rating: 5,
+  },
+  {
+    name: "Farhan Saeed",
+    role: "Verified Family Customer",
+    comment: "The 1.5L bottles are our home standard now. Children love the natural taste and we have peace of mind regarding purity.",
+    rating: 5,
+  },
+  {
+    name: "Ayesha Malik",
+    role: "School Administrator",
+    comment: "Reliable delivery schedules and the water bottles arrive spotless. Mian Rayan Traders provide commendable customer care.",
+    rating: 5,
+  },
 ];
 
 export default function HomePage() {
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    const fn = () => setMobile(window.innerWidth <= 900);
-    fn();
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
+    const handleResize = () => setMobile(window.innerWidth <= 900);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <>
-      {/* ════════════ HERO ════════════ */}
+    <div style={{ background: "#ffffff", overflow: "hidden" }}>
+      {/* ══════════════ 1. HERO SECTION ══════════════ */}
       <section
         style={{
           position: "relative",
-          minHeight: mobile ? "auto" : 680,
-          background: `linear-gradient(160deg, ${C.sky} 0%, #d0edf7 40%, ${C.white} 100%)`,
+          minHeight: mobile ? "auto" : "88vh",
+          display: "flex",
+          alignItems: "center",
+          background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 45%, #ffffff 100%)",
           overflow: "hidden",
+          padding: mobile ? "40px 0 50px" : "60px 0 80px",
         }}
       >
-        {/* Subtle background photo */}
-        <div style={{ position: "absolute", inset: 0 }}>
-          <Image
-            src="/images/cholistanHero.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center 40%", opacity: 0.07 }}
-          />
-        </div>
-
-        {/* Wave accent top-right */}
+        {/* Ambient Water Rings in Background */}
         <div
           style={{
             position: "absolute",
-            top: -60,
-            right: -80,
-            width: mobile ? 350 : 700,
-            height: mobile ? 350 : 700,
+            top: "-15%",
+            right: "-5%",
+            width: mobile ? 360 : 750,
+            height: mobile ? 360 : 750,
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${C.aqua}22 0%, ${C.aqua}05 55%, transparent 72%)`,
+            background: "radial-gradient(circle, rgba(0, 180, 216, 0.16) 0%, rgba(2, 132, 199, 0.04) 50%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: -40,
-            left: -60,
-            width: mobile ? 280 : 520,
-            height: mobile ? 280 : 520,
+            bottom: "-10%",
+            left: "-10%",
+            width: mobile ? 300 : 600,
+            height: mobile ? 300 : 600,
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${C.ocean}14 0%, transparent 68%)`,
+            background: "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
 
         <div
           style={{
-            position: "relative",
-            zIndex: 2,
-            width: "min(93%, 1480px)",
+            width: "min(93%, 1280px)",
             margin: "0 auto",
-            minHeight: mobile ? "auto" : 680,
             display: "flex",
             flexDirection: mobile ? "column" : "row",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: mobile ? 20 : 40,
-            paddingTop: mobile ? 52 : 60,
-            paddingBottom: mobile ? 40 : 60,
+            gap: mobile ? 36 : 48,
+            position: "relative",
+            zIndex: 2,
           }}
         >
-          {/* Left text */}
-          <div style={{ width: mobile ? "100%" : "48%", textAlign: mobile ? "center" : "left" }}>
-            {/* Badge */}
+          {/* Left Text */}
+          <div style={{ flex: "1 1 50%", maxWidth: 620, textAlign: mobile ? "center" : "left" }}>
+            {/* Origin Badge */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                padding: "7px 16px",
-                borderRadius: 6,
-                background: `${C.aqua}18`,
-                border: `1px solid ${C.aqua}40`,
-                color: "#0077b6",
-                fontSize: 11.5,
+                padding: "6px 16px",
+                borderRadius: 30,
+                background: "rgba(2, 132, 199, 0.08)",
+                border: "1px solid rgba(2, 132, 199, 0.2)",
+                color: C.ocean,
+                fontSize: 12.5,
                 fontWeight: 700,
-                letterSpacing: 1.2,
+                letterSpacing: 1,
                 textTransform: "uppercase",
-                marginBottom: 22,
+                marginBottom: 20,
               }}
             >
               <span
                 style={{
-                  width: 7,
-                  height: 7,
+                  width: 8,
+                  height: 8,
                   borderRadius: "50%",
-                  background: C.aqua,
-                  animation: "pulse-drop 2.5s ease infinite",
-                  flexShrink: 0,
+                  background: "#00b4d8",
+                  boxShadow: "0 0 8px #00b4d8",
                 }}
               />
-              Pure Natural Water · Pakistan
+              Pure Natural Water · Cholistan Heritage
             </div>
 
             {/* Headline */}
             <h1
               style={{
-                margin: 0,
-                fontSize: mobile ? 48 : 76,
+                margin: "0 0 18px",
+                fontSize: mobile ? 42 : 68,
                 fontWeight: 900,
-                lineHeight: 0.98,
-                letterSpacing: -2,
+                lineHeight: 1.05,
+                letterSpacing: -1.5,
                 color: C.navy,
               }}
             >
-              Nature in
+              Nature in{" "}
               <span
                 style={{
-                  display: "block",
-                  backgroundImage: `linear-gradient(135deg, ${C.ocean} 0%, ${C.aqua} 100%)`,
+                  background: "linear-gradient(135deg, #0284c7 0%, #00b4d8 60%, #06b6d4 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
+                  display: "inline-block",
                 }}
               >
                 Every Sip
@@ -211,499 +224,457 @@ export default function HomePage() {
 
             <p
               style={{
-                margin: mobile ? "18px auto 0" : "20px 0 0",
-                maxWidth: 500,
-                color: C.textSub,
-                fontSize: mobile ? 15 : 17,
-                lineHeight: 1.75,
+                margin: "0 0 28px",
+                fontSize: mobile ? 15.5 : 18,
+                color: C.slate,
+                lineHeight: 1.7,
+                maxWidth: 540,
               }}
             >
-              Fresh, pure water inspired by the golden beauty of Cholistan —
-              crafted for your home, office, travel and everyday life.
+              Experience crisp, pure, and naturally refreshing drinking water inspired by the golden sands of Cholistan — processed through multi-stage purification for everyday health.
             </p>
 
-            {/* Tag chips */}
+            {/* CTA Buttons */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: 8,
+                gap: 14,
                 justifyContent: mobile ? "center" : "flex-start",
-                marginTop: 20,
-              }}
-            >
-              {["100% Pure", "No Additives", "Natural", "Pakistani"].map((t) => (
-                <span
-                  key={t}
-                  style={{
-                    padding: "5px 13px",
-                    borderRadius: 6,
-                    background: `${C.ocean}0D`,
-                    border: `1px solid ${C.ocean}18`,
-                    color: C.ocean,
-                    fontSize: 12,
-                    fontWeight: 600,
-                  }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: mobile ? "column" : "row",
-                gap: 12,
-                justifyContent: mobile ? "center" : "flex-start",
-                alignItems: mobile ? "center" : "flex-start",
-                marginTop: 30,
+                alignItems: "center",
+                marginBottom: 36,
               }}
             >
               <Link
                 href="/products"
-                id="hero-cta-products"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  padding: "14px 28px",
-                  borderRadius: 8,
-                  background: C.ocean,
-                  color: C.white,
-                  textDecoration: "none",
+                  padding: "14px 30px",
+                  borderRadius: 12,
+                  background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
+                  color: "#ffffff",
                   fontSize: 15,
                   fontWeight: 700,
-                  boxShadow: "0 8px 28px rgba(0,95,158,0.28)",
-                  whiteSpace: "nowrap",
+                  textDecoration: "none",
+                  boxShadow: "0 10px 28px rgba(2, 132, 199, 0.35)",
+                  transition: "transform 0.2s ease",
                 }}
               >
-                Explore Products →
+                <span>Explore Bottle Sizes</span>
+                <span>→</span>
               </Link>
+
               <Link
-                href="/about"
-                id="hero-cta-about"
+                href="https://wa.me/923126016060?text=Hello%201%20Sip,%20I%20want%20to%20order%20water%20bottles"
+                target="_blank"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
                   padding: "13px 26px",
-                  borderRadius: 8,
-                  background: C.white,
-                  border: `1.5px solid ${C.aqua}`,
-                  color: C.ocean,
-                  textDecoration: "none",
+                  borderRadius: 12,
+                  background: "#ffffff",
+                  border: "1.5px solid rgba(2, 132, 199, 0.25)",
+                  color: C.navy,
                   fontSize: 15,
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.05)",
+                  transition: "background 0.2s ease",
                 }}
               >
-                Our Story
+                <span>💬 Quick WhatsApp Order</span>
               </Link>
             </div>
 
-            {/* Mini trust icons */}
+            {/* Quick Micro-Features */}
             <div
               style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: mobile ? 14 : 22,
-                justifyContent: mobile ? "center" : "flex-start",
-                marginTop: 30,
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: 12,
+                borderTop: "1px solid rgba(2, 132, 199, 0.14)",
+                paddingTop: 22,
               }}
             >
               {[
-                { icon: "💧", title: "Pure", sub: "Crystal Clear" },
-                { icon: "🌊", title: "Fresh", sub: "Every Bottle" },
-                { icon: "🇵🇰", title: "Local", sub: "Pakistani Brand" },
-              ].map((f) => (
-                <div key={f.title} style={{ display: "flex", alignItems: "center", gap: 9 }}>
-                  <div
-                    style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 10,
-                      background: C.white,
-                      border: `1px solid ${C.aqua}38`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 18,
-                      boxShadow: `0 4px 14px ${C.ocean}10`,
-                    }}
-                  >
-                    {f.icon}
-                  </div>
-                  <div>
-                    <div style={{ color: C.navy, fontSize: 13, fontWeight: 700 }}>{f.title}</div>
-                    <div style={{ color: C.textMuted, fontSize: 11, marginTop: 1 }}>{f.sub}</div>
-                  </div>
+                { icon: "💧", title: "Pure Taste", sub: "Balanced Minerals" },
+                { icon: "🔬", title: "Tested Purity", sub: "Multi-Filter RO" },
+                { icon: "🚚", title: "Direct Supply", sub: "Fort Abbas Depot" },
+              ].map((m) => (
+                <div key={m.title} style={{ textAlign: mobile ? "center" : "left" }}>
+                  <div style={{ fontSize: 18, marginBottom: 2 }}>{m.icon}</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: C.navy }}>{m.title}</div>
+                  <div style={{ fontSize: 11.5, color: C.slate }}>{m.sub}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right product visual */}
+          {/* Right Visual Image */}
           <div
             style={{
-              position: "relative",
-              width: mobile ? "100%" : "52%",
-              minHeight: mobile ? 340 : 580,
+              flex: "1 1 50%",
               display: "flex",
-              alignItems: "flex-end",
+              alignItems: "center",
               justifyContent: "center",
+              position: "relative",
             }}
           >
-            {/* Ripple rings */}
-            {[500, 400, 300].map((s, i) => (
-              <div
-                key={s}
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: mobile ? 30 : 50,
-                  transform: "translateX(-50%)",
-                  width: mobile ? s * 0.55 : s,
-                  height: mobile ? s * 0.55 : s,
-                  borderRadius: "50%",
-                  border: `1.5px solid ${i === 0 ? `${C.aqua}20` : i === 1 ? `${C.ocean}18` : `${C.aqua}12`}`,
-                  animation: `float ${7 + i * 2}s ease-in-out infinite ${i % 2 === 0 ? "" : "reverse"}`,
-                }}
-              />
-            ))}
-
-            {/* Glow pool */}
+            {/* Halo Rings */}
             <div
               style={{
                 position: "absolute",
-                left: "50%",
-                top: mobile ? 40 : 60,
-                transform: "translateX(-50%)",
-                width: mobile ? 260 : 440,
-                height: mobile ? 260 : 440,
+                width: mobile ? 280 : 460,
+                height: mobile ? 280 : 460,
                 borderRadius: "50%",
-                background: `radial-gradient(circle, ${C.aqua}20 0%, ${C.ocean}10 45%, transparent 70%)`,
-                animation: "float 8s ease-in-out infinite",
+                background: "radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, rgba(2, 132, 199, 0.05) 60%, transparent 70%)",
+                filter: "blur(20px)",
               }}
             />
 
-            <Image
-              src="/images/heroProducts.png"
-              alt="1 Sip Natural Water products"
-              width={720}
-              height={560}
-              priority
-              sizes="(max-width: 900px) 90vw, 50vw"
+            <div
               style={{
                 position: "relative",
                 zIndex: 2,
                 width: "100%",
-                maxWidth: mobile ? 380 : 660,
-                height: "auto",
-                objectFit: "contain",
-                filter: `drop-shadow(0 32px 56px ${C.ocean}20)`,
-                animation: "float 8s ease-in-out infinite",
-              }}
-            />
-
-            {/* Floating badges */}
-            <div
-              style={{
-                position: "absolute",
-                zIndex: 4,
-                top: mobile ? 24 : 70,
-                right: mobile ? 8 : 20,
-                padding: "11px 15px",
-                borderRadius: 10,
-                background: C.white,
-                border: `1px solid ${C.aqua}35`,
-                boxShadow: `0 8px 28px ${C.ocean}14`,
-                color: "#0077b6",
-                fontSize: 12.5,
-                fontWeight: 700,
+                maxWidth: mobile ? 360 : 540,
               }}
             >
-              💧 Crystal Pure
-            </div>
+              <Image
+                src="/images/heroProducts.png"
+                alt="1 Sip Mineral Water Range"
+                width={650}
+                height={520}
+                priority
+                sizes="(max-width: 900px) 90vw, 45vw"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 24px 44px rgba(2, 132, 199, 0.2))",
+                }}
+              />
 
-            <div
-              style={{
-                position: "absolute",
-                zIndex: 4,
-                left: mobile ? 8 : 20,
-                bottom: mobile ? 18 : 60,
-                padding: "11px 15px",
-                borderRadius: 10,
-                background: C.white,
-                border: `1px solid ${C.ocean}25`,
-                boxShadow: `0 8px 28px ${C.ocean}14`,
-                color: C.ocean,
-                fontSize: 12.5,
-                fontWeight: 700,
-              }}
-            >
-              🌊 Fresh Every Day
+              {/* Floating Quality Badge */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: mobile ? 10 : 30,
+                  left: mobile ? 0 : -10,
+                  background: "rgba(255, 255, 255, 0.92)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1px solid rgba(0, 180, 216, 0.3)",
+                  borderRadius: 14,
+                  padding: "10px 16px",
+                  boxShadow: "0 10px 24px rgba(2, 132, 199, 0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: "50%",
+                    background: "rgba(0, 180, 216, 0.15)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 18,
+                  }}
+                >
+                  ✓
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: C.navy }}>100% Food-Grade</div>
+                  <div style={{ fontSize: 11, color: C.slate }}>Sterilized Bottles</div>
+                </div>
+              </div>
+
+              {/* Floating Origin Badge */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: mobile ? 10 : 25,
+                  right: mobile ? 0 : -10,
+                  background: "rgba(255, 255, 255, 0.92)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1px solid rgba(2, 132, 199, 0.3)",
+                  borderRadius: 14,
+                  padding: "10px 16px",
+                  boxShadow: "0 10px 24px rgba(2, 132, 199, 0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: "50%",
+                    background: "rgba(2, 132, 199, 0.12)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 18,
+                  }}
+                >
+                  🌊
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: C.navy }}>Crystal Fresh</div>
+                  <div style={{ fontSize: 11, color: C.slate }}>Natural Sweetness</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Wave bottom divider */}
-        <div
-          style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 50, overflow: "hidden" }}
-        >
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-            <path
-              d="M0,50 L0,25 C360,5 720,45 1080,20 C1260,10 1380,30 1440,25 L1440,50 Z"
-              fill={C.white}
-            />
-          </svg>
-        </div>
       </section>
 
-      {/* ════════════ STATS ════════════ */}
-      <section style={{ background: C.white, borderBottom: `1px solid ${C.aqua}18` }}>
+      {/* ══════════════ 2. PURITY METRICS BAR ══════════════ */}
+      <section
+        style={{
+          background: "#ffffff",
+          borderTop: "1px solid rgba(2, 132, 199, 0.1)",
+          borderBottom: "1px solid rgba(2, 132, 199, 0.1)",
+          padding: "30px 0",
+        }}
+      >
         <div
           style={{
-            width: "min(93%, 1480px)",
+            width: "min(93%, 1280px)",
             margin: "0 auto",
-            padding: "24px 0",
             display: "grid",
-            gridTemplateColumns: mobile ? "repeat(2,1fr)" : "repeat(4,1fr)",
-            gap: mobile ? 20 : 0,
+            gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+            gap: mobile ? 24 : 32,
           }}
         >
-          {stats.map((s, i) => (
+          {stats.map((s, idx) => (
             <div
               key={s.label}
               style={{
-                textAlign: "center",
-                padding: "10px 16px",
-                borderRight: !mobile && i !== stats.length - 1 ? `1px solid ${C.aqua}20` : "none",
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+                justifyContent: mobile ? "flex-start" : "center",
+                borderRight: !mobile && idx < stats.length - 1 ? "1px solid rgba(2, 132, 199, 0.12)" : "none",
+                paddingRight: !mobile ? 20 : 0,
               }}
             >
-              <div style={{ fontSize: 22, marginBottom: 4 }}>{s.icon}</div>
               <div
                 style={{
-                  fontSize: mobile ? 30 : 38,
-                  fontWeight: 900,
-                  backgroundImage: `linear-gradient(135deg, ${C.ocean}, ${C.aqua})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  lineHeight: 1,
+                  width: 48,
+                  height: 48,
+                  borderRadius: 12,
+                  background: "rgba(2, 132, 199, 0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 22,
+                  flexShrink: 0,
                 }}
               >
-                {s.value}
+                {s.icon}
               </div>
-              <div style={{ marginTop: 5, color: C.textMuted, fontSize: 12, fontWeight: 600 }}>
-                {s.label}
+              <div>
+                <div style={{ fontSize: 28, fontWeight: 900, color: C.navy, lineHeight: 1.1 }}>
+                  {s.value}
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: C.slate }}>
+                  {s.label}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ════════════ WHY 1 SIP ════════════ */}
-      <section style={{ background: C.sky, overflow: "hidden", position: "relative" }}>
-        <div
-          style={{
-            position: "absolute",
-            top: "-15%",
-            right: "-8%",
-            width: 600,
-            height: 600,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${C.aqua}14 0%, transparent 68%)`,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "70px 0 80px" : "90px 0 100px",
-          }}
-        >
-          <div style={{ textAlign: "center", marginBottom: mobile ? 44 : 58 }}>
+      {/* ══════════════ 3. WHY CHOOSE 1 SIP ══════════════ */}
+      <section
+        style={{
+          background: "linear-gradient(180deg, #f8fcff 0%, #ffffff 100%)",
+          padding: mobile ? "60px 0" : "90px 0",
+          position: "relative",
+        }}
+      >
+        <div style={{ width: "min(93%, 1280px)", margin: "0 auto" }}>
+          {/* Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 650, margin: "0 auto 52px" }}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: 7,
-                padding: "6px 16px",
-                borderRadius: 6,
-                background: `${C.ocean}0F`,
-                border: `1px solid ${C.ocean}22`,
+                gap: 6,
+                padding: "4px 14px",
+                borderRadius: 20,
+                background: "rgba(0, 180, 216, 0.1)",
                 color: C.ocean,
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: 1.5,
                 textTransform: "uppercase",
-                marginBottom: 16,
+                letterSpacing: 1.2,
+                marginBottom: 12,
               }}
             >
-              Why Choose 1 Sip
+              Our Purity Commitment
             </div>
             <h2
               style={{
-                margin: 0,
-                fontSize: mobile ? 32 : 48,
+                margin: "0 0 14px",
+                fontSize: mobile ? 30 : 42,
                 fontWeight: 900,
                 color: C.navy,
-                letterSpacing: -0.5,
-                lineHeight: 1.1,
+                letterSpacing: -0.8,
               }}
             >
-              Freshness for{" "}
-              <span
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${C.ocean}, ${C.aqua})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Every Moment
-              </span>
+              Why 1 Sip is the Standard for Pure Water
             </h2>
+            <p style={{ margin: 0, fontSize: 16, color: C.slate, lineHeight: 1.6 }}>
+              Carefully processed to preserve pristine minerals while removing any potential micro-contaminants.
+            </p>
           </div>
 
+          {/* Cards Grid */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "repeat(4, 1fr)",
-              gap: 14,
+              gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)",
+              gap: 24,
             }}
           >
-            {whyItems.map((item) => (
+            {whyFeatures.map((f) => (
               <div
-                key={item.title}
+                key={f.title}
                 style={{
-                  padding: "28px 22px",
-                  borderRadius: 14,
-                  background: C.white,
-                  border: `1px solid ${item.accent}18`,
-                  boxShadow: `0 6px 28px ${item.accent}0A`,
-                  position: "relative",
-                  overflow: "hidden",
+                  background: "#ffffff",
+                  border: "1px solid rgba(2, 132, 199, 0.12)",
+                  borderRadius: 18,
+                  padding: "32px",
+                  boxShadow: "0 10px 30px rgba(2, 132, 199, 0.04)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
                 }}
               >
-                {/* Top accent bar */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    background: `linear-gradient(90deg, ${item.accent}, ${C.aqua})`,
-                  }}
-                />
-                <div
-                  style={{
-                    width: 54,
-                    height: 54,
-                    borderRadius: 12,
-                    background: `${item.accent}12`,
-                    border: `1px solid ${item.accent}22`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 26,
-                    marginBottom: 18,
-                  }}
-                >
-                  {item.icon}
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: 18,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 52,
+                        height: 52,
+                        borderRadius: 14,
+                        background: "linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(0, 180, 216, 0.08) 100%)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 26,
+                      }}
+                    >
+                      {f.icon}
+                    </div>
+                    <span
+                      style={{
+                        fontSize: 11.5,
+                        fontWeight: 700,
+                        color: C.ocean,
+                        background: "rgba(2, 132, 199, 0.08)",
+                        padding: "4px 10px",
+                        borderRadius: 20,
+                      }}
+                    >
+                      {f.badge}
+                    </span>
+                  </div>
+
+                  <h3 style={{ margin: "0 0 10px", fontSize: 20, fontWeight: 800, color: C.navy }}>
+                    {f.title}
+                  </h3>
+                  <p style={{ margin: 0, fontSize: 14.5, color: C.slate, lineHeight: 1.7 }}>
+                    {f.desc}
+                  </p>
                 </div>
-                <h3 style={{ margin: "0 0 8px", color: C.navy, fontSize: 16.5, fontWeight: 800 }}>
-                  {item.title}
-                </h3>
-                <p style={{ margin: 0, color: C.textSub, fontSize: 13.5, lineHeight: 1.7 }}>
-                  {item.desc}
-                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Wave between sky and white */}
-      <WaveDivider from={C.sky} to={C.white} />
-
-      {/* ════════════ PRODUCTS PREVIEW ════════════ */}
-      <section style={{ background: C.white }}>
-        <div
-          style={{
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "20px 0 70px" : "20px 0 90px",
-          }}
-        >
+      {/* ══════════════ 4. BOTTLE SIZES OVERVIEW ══════════════ */}
+      <section
+        style={{
+          background: "#ffffff",
+          padding: mobile ? "60px 0" : "90px 0",
+          borderTop: "1px solid rgba(2, 132, 199, 0.1)",
+        }}
+      >
+        <div style={{ width: "min(93%, 1280px)", margin: "0 auto" }}>
           <div
             style={{
               display: "flex",
               flexDirection: mobile ? "column" : "row",
               justifyContent: "space-between",
               alignItems: mobile ? "flex-start" : "flex-end",
-              gap: 18,
-              marginBottom: mobile ? 36 : 48,
+              gap: 20,
+              marginBottom: 44,
             }}
           >
             <div>
               <div
                 style={{
-                  color: C.aqua,
-                  fontSize: 11,
+                  color: C.ocean,
+                  fontSize: 12,
                   fontWeight: 700,
                   textTransform: "uppercase",
-                  letterSpacing: 1.5,
-                  marginBottom: 10,
+                  letterSpacing: 1.2,
+                  marginBottom: 8,
                 }}
               >
-                Our Products
+                Available Formats
               </div>
               <h2
                 style={{
                   margin: 0,
-                  fontSize: mobile ? 30 : 44,
+                  fontSize: mobile ? 28 : 40,
                   fontWeight: 900,
                   color: C.navy,
-                  lineHeight: 1.1,
-                  letterSpacing: -0.5,
+                  letterSpacing: -0.8,
                 }}
               >
-                Pure Water for{" "}
-                <span
-                  style={{
-                    backgroundImage: `linear-gradient(135deg, ${C.ocean}, ${C.aqua})`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Every Need
-                </span>
+                Tailored for Every Occasion
               </h2>
             </div>
             <Link
               href="/products"
-              id="home-viewall"
               style={{
-                padding: "10px 22px",
-                borderRadius: 8,
-                border: `1.5px solid ${C.ocean}`,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                fontSize: 14.5,
+                fontWeight: 700,
                 color: C.ocean,
                 textDecoration: "none",
-                fontSize: 13.5,
-                fontWeight: 700,
-                background: `${C.ocean}06`,
-                whiteSpace: "nowrap",
+                background: "rgba(2, 132, 199, 0.08)",
+                padding: "8px 18px",
+                borderRadius: 10,
               }}
             >
-              View All →
+              <span>View All Products</span>
+              <span>→</span>
             </Link>
           </div>
 
@@ -711,70 +682,77 @@ export default function HomePage() {
             style={{
               display: "grid",
               gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)",
-              gap: 16,
+              gap: 24,
             }}
           >
             {products.map((p) => (
               <div
                 key={p.size}
                 style={{
-                  padding: "28px 24px",
-                  borderRadius: 14,
-                  background: C.sky,
-                  border: `1px solid ${p.col}20`,
-                  boxShadow: `0 4px 20px ${p.col}0C`,
-                  position: "relative",
-                  overflow: "hidden",
+                  borderRadius: 20,
+                  background: "linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%)",
+                  border: "1.5px solid rgba(2, 132, 199, 0.14)",
+                  padding: "32px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 24px rgba(2, 132, 199, 0.05)",
                 }}
               >
-                {/* Water wave bg */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: -10,
-                    left: -10,
-                    right: -10,
-                    height: 60,
-                    background: `linear-gradient(180deg, transparent, ${p.col}12)`,
-                    borderRadius: "0 0 14px 14px",
-                  }}
-                />
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    alignSelf: "flex-start",
-                    padding: "5px 14px",
-                    borderRadius: 6,
-                    background: `${p.col}18`,
-                    border: `1px solid ${p.col}30`,
-                    color: p.col,
-                    fontSize: 13.5,
-                    fontWeight: 800,
-                    marginBottom: 14,
-                  }}
-                >
-                  {p.size}
+                <div>
+                  <div
+                    style={{
+                      display: "inline-block",
+                      fontSize: 32,
+                      fontWeight: 900,
+                      color: p.color,
+                      lineHeight: 1,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {p.size}
+                  </div>
+                  <h3 style={{ margin: "0 0 6px", fontSize: 19, fontWeight: 800, color: C.navy }}>
+                    {p.title}
+                  </h3>
+                  <div
+                    style={{
+                      fontSize: 12.5,
+                      fontWeight: 700,
+                      color: C.ocean,
+                      marginBottom: 14,
+                      background: "rgba(2, 132, 199, 0.08)",
+                      display: "inline-block",
+                      padding: "3px 10px",
+                      borderRadius: 6,
+                    }}
+                  >
+                    {p.ideal}
+                  </div>
+                  <p style={{ margin: "0 0 24px", fontSize: 14, color: C.slate, lineHeight: 1.65 }}>
+                    {p.desc}
+                  </p>
                 </div>
-                <div style={{ color: C.navy, fontSize: 17, fontWeight: 800, marginBottom: 6 }}>
-                  {p.use}
-                </div>
-                <p style={{ margin: "0 0 18px", color: C.textSub, fontSize: 13.5, lineHeight: 1.65 }}>
-                  {p.desc}
-                </p>
+
                 <Link
-                  href="/products"
+                  href="/contact"
                   style={{
-                    display: "inline-flex",
+                    display: "flex",
                     alignItems: "center",
-                    gap: 5,
-                    color: p.col,
-                    textDecoration: "none",
-                    fontSize: 13,
+                    justifyContent: "center",
+                    gap: 8,
+                    padding: "12px",
+                    borderRadius: 10,
+                    background: "rgba(2, 132, 199, 0.08)",
+                    border: "1px solid rgba(2, 132, 199, 0.2)",
+                    color: C.navy,
                     fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: "none",
                   }}
                 >
-                  Learn More →
+                  <span>Order {p.size}</span>
+                  <span>→</span>
                 </Link>
               </div>
             ))}
@@ -782,544 +760,220 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════ CHOLISTAN STORY ════════════ */}
+      {/* ══════════════ 5. CHOLISTAN HERITAGE SPOTLIGHT ══════════════ */}
       <section
         style={{
+          background: "linear-gradient(135deg, #041c32 0%, #032a48 100%)",
+          color: "#ffffff",
+          padding: mobile ? "60px 0" : "90px 0",
           position: "relative",
           overflow: "hidden",
-          background: C.sky,
-          paddingTop: 0,
         }}
       >
-        {/* Wave top */}
-        <div style={{ height: 50, overflow: "hidden", background: C.white }}>
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-            <path
-              d="M0,0 L0,25 C360,45 720,5 1080,30 C1260,40 1380,20 1440,25 L1440,0 Z"
-              fill={C.sky}
-            />
-          </svg>
-        </div>
-
         <div
           style={{
             position: "absolute",
-            right: "-5%",
-            top: "20%",
-            width: 550,
-            height: 550,
+            top: 0,
+            right: 0,
+            width: 500,
+            height: 500,
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${C.aqua}12 0%, transparent 68%)`,
+            background: "radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
 
         <div
           style={{
+            width: "min(93%, 1280px)",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: mobile ? "1fr" : "1.1fr 0.9fr",
+            gap: mobile ? 36 : 56,
+            alignItems: "center",
             position: "relative",
             zIndex: 2,
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "50px 0 70px" : "60px 0 90px",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
-              gap: mobile ? 44 : 80,
-              alignItems: "center",
-            }}
-          >
-            {/* Image */}
-            <div style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  borderRadius: 18,
-                  background: `linear-gradient(135deg, ${C.aqua}28, ${C.ocean}18)`,
-                  transform: "translate(10px, 10px)",
-                }}
-              />
-              <div
-                style={{
-                  position: "relative",
-                  borderRadius: 18,
-                  overflow: "hidden",
-                  border: `1px solid ${C.aqua}25`,
-                  boxShadow: `0 20px 60px ${C.ocean}14`,
-                }}
-              >
-                <Image
-                  src="/images/cholistanStory.png"
-                  alt="Cholistan desert"
-                  width={680}
-                  height={460}
-                  sizes="(max-width: 900px) 90vw, 45vw"
-                  style={{ width: "100%", height: "auto", display: "block" }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: `linear-gradient(180deg, transparent 50%, ${C.navy}50 100%)`,
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 20,
-                    left: 20,
-                    padding: "12px 17px",
-                    borderRadius: 10,
-                    background: "rgba(255,255,255,0.93)",
-                    backdropFilter: "blur(12px)",
-                    border: `1px solid ${C.aqua}28`,
-                    boxShadow: `0 6px 22px ${C.ocean}10`,
-                  }}
-                >
-                  <div style={{ color: C.aqua, fontSize: 10.5, fontWeight: 700, marginBottom: 2 }}>
-                    From the Heart of Cholistan
-                  </div>
-                  <div style={{ color: C.navy, fontSize: 12.5, fontWeight: 700 }}>
-                    Desert · Water · Nature · Pakistan
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Text */}
-            <div>
-              <div
-                style={{
-                  color: "#f59e0b",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: 1.5,
-                  marginBottom: 14,
-                }}
-              >
-                Inspired by Cholistan
-              </div>
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: mobile ? 30 : 44,
-                  fontWeight: 900,
-                  color: C.navy,
-                  lineHeight: 1.1,
-                  letterSpacing: -0.5,
-                }}
-              >
-                The Land of{" "}
-                <span
-                  style={{
-                    backgroundImage: "linear-gradient(135deg, #f59e0b, #f97316)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Endless Beauty
-                </span>
-              </h2>
-              <p style={{ marginTop: 18, marginBottom: 13, color: C.textSub, fontSize: mobile ? 14.5 : 16, lineHeight: 1.8 }}>
-                Cholistan is one of Pakistan&apos;s most distinctive landscapes — known for its golden
-                desert, wide horizons, historic forts and breathtaking natural beauty.
-              </p>
-              <p style={{ margin: 0, color: C.textSub, fontSize: mobile ? 14.5 : 16, lineHeight: 1.8 }}>
-                The identity of 1 Sip draws from this land, combining water, nature and Pakistani
-                character in one unforgettable brand experience.
-              </p>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
-                  gap: 10,
-                  marginTop: 26,
-                }}
-              >
-                {[
-                  { icon: "🏜️", label: "Desert", col: "#f59e0b" },
-                  { icon: "💧", label: "Water", col: C.aqua },
-                  { icon: "🌿", label: "Nature", col: "#22c55e" },
-                  { icon: "🕌", label: "Heritage", col: C.ocean },
-                ].map((d) => (
-                  <div
-                    key={d.label}
-                    style={{
-                      padding: "14px 6px",
-                      borderRadius: 10,
-                      background: C.white,
-                      border: `1px solid ${d.col}20`,
-                      textAlign: "center",
-                      boxShadow: `0 3px 12px ${d.col}0A`,
-                    }}
-                  >
-                    <div style={{ fontSize: 22, marginBottom: 5 }}>{d.icon}</div>
-                    <div style={{ color: d.col, fontSize: 10.5, fontWeight: 800 }}>{d.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                href="/about"
-                id="home-story-cta"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  marginTop: 26,
-                  padding: "12px 24px",
-                  borderRadius: 8,
-                  background: "rgba(245,158,11,0.10)",
-                  border: "1px solid rgba(245,158,11,0.25)",
-                  color: "#d97706",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  fontWeight: 700,
-                }}
-              >
-                Read Our Full Story →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Wave bottom */}
-        <div style={{ height: 50, overflow: "hidden" }}>
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-            <path d="M0,50 L0,25 C360,5 720,45 1080,20 C1260,10 1380,30 1440,25 L1440,50 Z" fill={C.white} />
-          </svg>
-        </div>
-      </section>
-
-      {/* ════════════ QUALITY ════════════ */}
-      <section style={{ background: C.white }}>
-        <div
-          style={{
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "50px 0 70px" : "60px 0 90px",
-          }}
-        >
-          <div style={{ textAlign: "center", marginBottom: mobile ? 40 : 52 }}>
+          <div>
             <div
               style={{
                 display: "inline-flex",
-                gap: 7,
-                padding: "6px 16px",
-                borderRadius: 6,
-                background: `${C.aqua}12`,
-                border: `1px solid ${C.aqua}28`,
-                color: "#0077b6",
-                fontSize: 11,
+                alignItems: "center",
+                gap: 8,
+                padding: "4px 14px",
+                borderRadius: 20,
+                background: "rgba(0, 180, 216, 0.15)",
+                border: "1px solid rgba(0, 180, 216, 0.3)",
+                color: C.aqua,
+                fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: 1.5,
                 textTransform: "uppercase",
-                marginBottom: 14,
+                letterSpacing: 1.2,
+                marginBottom: 16,
               }}
             >
-              Quality Process
+              The Story of 1 Sip
+            </div>
+            <h2
+              style={{
+                margin: "0 0 18px",
+                fontSize: mobile ? 28 : 42,
+                fontWeight: 900,
+                lineHeight: 1.15,
+                letterSpacing: -0.8,
+              }}
+            >
+              Born from the Golden Sands, Dedicated to Pure Life
+            </h2>
+            <p style={{ margin: "0 0 18px", fontSize: 15.5, color: "#cbd5e1", lineHeight: 1.75 }}>
+              Cholistan is known for its majestic dunes, resilience, and rich traditions. In an environment where every single drop of water represents life and survival, 1 Sip was founded with a clear vow: to bring pure, crisp, and refreshing drinking water to every Pakistani home.
+            </p>
+            <p style={{ margin: "0 0 28px", fontSize: 14.5, color: "#94a3b8", lineHeight: 1.7 }}>
+              From our modern facility in Fort Abbas, Mian Rayan Traders oversees strict quality control, hygiene audits, and automated bottling.
+            </p>
+
+            <Link
+              href="/about"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "12px 26px",
+                borderRadius: 10,
+                background: "linear-gradient(135deg, #0284c7 0%, #00b4d8 100%)",
+                color: "#ffffff",
+                fontSize: 14.5,
+                fontWeight: 700,
+                textDecoration: "none",
+                boxShadow: "0 6px 20px rgba(0, 180, 216, 0.3)",
+              }}
+            >
+              <span>Read Our Full Story</span>
+              <span>→</span>
+            </Link>
+          </div>
+
+          {/* Quality Purification Process Checklist */}
+          <div
+            style={{
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              borderRadius: 20,
+              padding: "32px",
+              backdropFilter: "blur(16px)",
+            }}
+          >
+            <h3 style={{ margin: "0 0 20px", fontSize: 20, fontWeight: 800, color: "#ffffff" }}>
+              4-Stage Purity Guarantee
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {puritySteps.map((st) => (
+                <div key={st.step} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      background: "rgba(0, 180, 216, 0.2)",
+                      border: "1px solid rgba(0, 180, 216, 0.4)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 13,
+                      fontWeight: 800,
+                      color: C.aqua,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {st.step}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: "#ffffff", marginBottom: 3 }}>
+                      {st.title}
+                    </div>
+                    <div style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.5 }}>
+                      {st.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════ 6. TESTIMONIALS ══════════════ */}
+      <section
+        style={{
+          background: "#ffffff",
+          padding: mobile ? "60px 0" : "90px 0",
+        }}
+      >
+        <div style={{ width: "min(93%, 1280px)", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 48px" }}>
+            <div
+              style={{
+                color: C.ocean,
+                fontSize: 12,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: 1.2,
+                marginBottom: 8,
+              }}
+            >
+              Customer Confidence
             </div>
             <h2
               style={{
                 margin: 0,
-                fontSize: mobile ? 30 : 44,
+                fontSize: mobile ? 28 : 38,
                 fontWeight: 900,
                 color: C.navy,
-                lineHeight: 1.1,
-                letterSpacing: -0.5,
+                letterSpacing: -0.8,
               }}
             >
-              Purity You Can{" "}
-              <span
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${C.ocean}, ${C.aqua})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Trust
-              </span>
+              Trusted Across Homes & Offices
             </h2>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)",
-              gap: 14,
-            }}
-          >
-            {qualitySteps.map((step) => (
-              <div
-                key={step.num}
-                style={{
-                  padding: "26px 20px",
-                  borderRadius: 14,
-                  background: C.sky,
-                  border: `1px solid ${step.col}18`,
-                  textAlign: "center",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                {/* Step number watermark */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: -6,
-                    right: 8,
-                    fontSize: 64,
-                    fontWeight: 900,
-                    color: `${step.col}0C`,
-                    lineHeight: 1,
-                    userSelect: "none",
-                  }}
-                >
-                  {step.num}
-                </div>
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{step.icon}</div>
-                <div style={{ color: step.col, fontSize: 10.5, fontWeight: 700, letterSpacing: 0.5, marginBottom: 5 }}>
-                  STEP {step.num}
-                </div>
-                <h3 style={{ margin: 0, color: C.navy, fontSize: 15, fontWeight: 800 }}>
-                  {step.title}
-                </h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════ TESTIMONIALS ════════════ */}
-      <section style={{ background: C.sky, overflow: "hidden", position: "relative" }}>
-        {/* Wave top */}
-        <div style={{ height: 50, overflow: "hidden", background: C.white }}>
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-            <path d="M0,0 L0,25 C360,45 720,5 1080,30 C1260,40 1380,20 1440,25 L1440,0 Z" fill={C.sky} />
-          </svg>
-        </div>
-
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "40px 0 70px" : "50px 0 88px",
-          }}
-        >
-          <div style={{ textAlign: "center", marginBottom: mobile ? 36 : 48 }}>
-            <h2 style={{ margin: 0, fontSize: mobile ? 28 : 40, fontWeight: 900, color: C.navy, letterSpacing: -0.5 }}>
-              What People Say
-            </h2>
-            <p style={{ margin: "12px auto 0", maxWidth: 440, color: C.textSub, fontSize: 15, lineHeight: 1.65 }}>
-              Real experiences from customers across Pakistan.
-            </p>
           </div>
 
           <div
             style={{
               display: "grid",
               gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)",
-              gap: 14,
+              gap: 24,
             }}
           >
-            {testimonials.map((t, i) => (
+            {reviews.map((r) => (
               <div
-                key={i}
+                key={r.name}
                 style={{
-                  padding: "26px 24px",
-                  borderRadius: 14,
-                  background: C.white,
-                  border: `1px solid ${C.aqua}18`,
-                  boxShadow: `0 4px 22px ${C.ocean}08`,
-                  position: "relative",
+                  background: "#f8fafc",
+                  border: "1px solid rgba(2, 132, 199, 0.1)",
+                  borderRadius: 16,
+                  padding: "28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
                 }}
               >
-                {/* Quote mark */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 14,
-                    right: 20,
-                    fontSize: 48,
-                    color: `${C.aqua}22`,
-                    lineHeight: 1,
-                    fontFamily: "serif",
-                    fontWeight: 900,
-                  }}
-                >
-                  "
-                </div>
-                {/* Top aqua bar */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    borderRadius: "14px 14px 0 0",
-                    background: `linear-gradient(90deg, ${C.ocean}, ${C.aqua})`,
-                  }}
-                />
-                <div style={{ color: "#f59e0b", fontSize: 14, marginBottom: 12, letterSpacing: 2 }}>
-                  ★★★★★
-                </div>
-                <p style={{ margin: "0 0 16px", color: C.textSub, fontSize: 14, lineHeight: 1.75, fontStyle: "italic" }}>
-                  &quot;{t.text}&quot;
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
-                  <div
-                    style={{
-                      width: 38,
-                      height: 38,
-                      borderRadius: "50%",
-                      background: `${C.ocean}14`,
-                      border: `1.5px solid ${C.aqua}30`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: C.ocean,
-                      fontSize: 15,
-                      fontWeight: 900,
-                    }}
-                  >
-                    {t.name[0]}
+                <div>
+                  <div style={{ color: "#f59e0b", fontSize: 15, marginBottom: 12 }}>
+                    {"★".repeat(r.rating)}
                   </div>
-                  <div>
-                    <div style={{ color: C.navy, fontSize: 13.5, fontWeight: 700 }}>{t.name}</div>
-                    <div style={{ color: C.textMuted, fontSize: 11.5 }}>{t.city}</div>
-                  </div>
+                  <p style={{ margin: "0 0 20px", fontSize: 14.5, color: C.slate, lineHeight: 1.7, fontStyle: "italic" }}>
+                    &ldquo;{r.comment}&rdquo;
+                  </p>
+                </div>
+                <div style={{ borderTop: "1px solid rgba(0, 0, 0, 0.06)", paddingTop: 14 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: C.navy }}>{r.name}</div>
+                  <div style={{ fontSize: 12.5, color: C.ocean }}>{r.role}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* ════════════ CTA BANNER ════════════ */}
-      <section
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          background: C.ocean,
-        }}
-      >
-        {/* Wave top */}
-        <div style={{ height: 50, overflow: "hidden" }}>
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-            <path d="M0,50 L0,25 C360,5 720,45 1080,20 C1260,10 1380,30 1440,25 L1440,50 Z" fill={C.sky} />
-          </svg>
-        </div>
-
-        {/* Aqua sheen */}
-        <div
-          style={{
-            position: "absolute",
-            right: "-8%",
-            top: "30%",
-            width: 600,
-            height: 600,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${C.aqua}35 0%, transparent 60%)`,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: "-6%",
-            bottom: "20%",
-            width: 450,
-            height: 450,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)`,
-            pointerEvents: "none",
-          }}
-        />
-
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            width: "min(93%, 1480px)",
-            margin: "0 auto",
-            padding: mobile ? "50px 0 60px" : "70px 0 80px",
-            display: "flex",
-            flexDirection: mobile ? "column" : "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 32,
-          }}
-        >
-          <div>
-            <div style={{ color: `${C.aqua}`, fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 }}>
-              1 Sip Natural Water
-            </div>
-            <h2
-              style={{
-                margin: 0,
-                fontSize: mobile ? 28 : 42,
-                fontWeight: 900,
-                color: C.white,
-                lineHeight: 1.12,
-                letterSpacing: -0.5,
-              }}
-            >
-              Ready for pure
-              <br />
-              <span style={{ color: C.aqua }}>natural refreshment?</span>
-            </h2>
-            <p style={{ margin: "12px 0 0", color: "rgba(255,255,255,0.55)", fontSize: mobile ? 14 : 16, lineHeight: 1.65 }}>
-              Order 500ml, 1.5L or 19L — contact us today.
-            </p>
-          </div>
-          <div style={{ display: "flex", gap: 12, flexShrink: 0, flexWrap: "wrap" }}>
-            <Link
-              href="/contact"
-              id="banner-contact"
-              style={{
-                padding: "14px 30px",
-                borderRadius: 8,
-                background: C.white,
-                color: C.ocean,
-                textDecoration: "none",
-                fontSize: 15,
-                fontWeight: 800,
-                boxShadow: "0 8px 28px rgba(0,0,0,0.15)",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Contact Us →
-            </Link>
-            <Link
-              href="/products"
-              id="banner-products"
-              style={{
-                padding: "13px 28px",
-                borderRadius: 8,
-                background: "rgba(255,255,255,0.12)",
-                border: "1.5px solid rgba(255,255,255,0.28)",
-                color: C.white,
-                textDecoration: "none",
-                fontSize: 15,
-                fontWeight: 600,
-                whiteSpace: "nowrap",
-              }}
-            >
-              View Products
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }
