@@ -12,7 +12,6 @@ const C = {
   navy: "#0c2340",
   textMuted: "#475569",
   white: "#ffffff",
-  borderLight: "rgba(2, 132, 199, 0.12)",
 };
 
 const navLinks = [
@@ -30,7 +29,7 @@ export default function Navbar() {
   const ticking = useRef(false);
 
   useEffect(() => {
-    const handleResize = () => setMobile(window.innerWidth <= 1000);
+    const handleResize = () => setMobile(window.innerWidth <= 1040);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -58,7 +57,7 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const navH = mobile ? 66 : 78;
+  const navH = mobile ? 68 : 80;
 
   return (
     <>
@@ -70,10 +69,10 @@ export default function Navbar() {
           right: 0,
           zIndex: 1000,
           height: navH,
-          background: scrolled ? "rgba(255, 255, 255, 0.94)" : "rgba(255, 255, 255, 0.82)",
+          background: scrolled ? "rgba(255, 255, 255, 0.96)" : "rgba(255, 255, 255, 0.88)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: `1px solid ${scrolled ? "rgba(2, 132, 199, 0.14)" : "rgba(2, 132, 199, 0.08)"}`,
+          borderBottom: `1px solid ${scrolled ? "rgba(2, 132, 199, 0.15)" : "rgba(2, 132, 199, 0.08)"}`,
           boxShadow: scrolled ? "0 8px 30px rgba(2, 132, 199, 0.08)" : "none",
           transition: "all 0.25s ease",
         }}
@@ -92,9 +91,10 @@ export default function Navbar() {
 
         <div
           style={{
-            width: "min(93%, 1280px)",
+            width: "min(90%, 1280px)",
             height: "100%",
             margin: "0 auto",
+            padding: mobile ? "0 16px" : 0,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -114,8 +114,8 @@ export default function Navbar() {
           >
             <div
               style={{
-                width: mobile ? 44 : 50,
-                height: mobile ? 44 : 50,
+                width: mobile ? 42 : 50,
+                height: mobile ? 42 : 50,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, rgba(0, 180, 216, 0.15) 0%, rgba(2, 132, 199, 0.05) 100%)",
                 border: "1.5px solid rgba(0, 180, 216, 0.3)",
@@ -142,7 +142,7 @@ export default function Navbar() {
               <div
                 style={{
                   color: C.navy,
-                  fontSize: mobile ? 16 : 18,
+                  fontSize: mobile ? 16 : 18.5,
                   fontWeight: 900,
                   lineHeight: 1.1,
                   letterSpacing: -0.5,
@@ -189,10 +189,10 @@ export default function Navbar() {
                       borderRadius: 24,
                       textDecoration: "none",
                       fontSize: 14,
-                      fontWeight: isActive ? 700 : 500,
+                      fontWeight: isActive ? 800 : 500,
                       color: isActive ? "#ffffff" : C.textMuted,
                       background: isActive ? "linear-gradient(135deg, #0284c7 0%, #00b4d8 100%)" : "transparent",
-                      boxShadow: isActive ? "0 4px 14px rgba(2, 132, 199, 0.25)" : "none",
+                      boxShadow: isActive ? "0 4px 14px rgba(2, 132, 199, 0.28)" : "none",
                       transition: "all 0.2s ease",
                     }}
                   >
@@ -205,20 +205,21 @@ export default function Navbar() {
 
           {/* Desktop Right Actions */}
           {!mobile && (
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <Link
                 href="tel:+923126016060"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: 6,
+                  gap: 7,
                   color: C.navy,
                   fontSize: 13.5,
-                  fontWeight: 600,
+                  fontWeight: 700,
                   textDecoration: "none",
                   padding: "8px 14px",
                   borderRadius: 10,
                   background: "rgba(2, 132, 199, 0.06)",
+                  border: "1px solid rgba(2, 132, 199, 0.12)",
                 }}
               >
                 <span>📞</span>
@@ -232,7 +233,7 @@ export default function Navbar() {
                   borderRadius: 10,
                   background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
                   color: "#ffffff",
-                  fontWeight: 700,
+                  fontWeight: 800,
                   fontSize: 13.5,
                   textDecoration: "none",
                   boxShadow: "0 6px 20px rgba(2, 132, 199, 0.3)",
@@ -294,7 +295,7 @@ export default function Navbar() {
             right: 0,
             bottom: 0,
             zIndex: 999,
-            background: "rgba(4, 27, 47, 0.4)",
+            background: "rgba(4, 27, 47, 0.45)",
             backdropFilter: "blur(10px)",
           }}
         >
@@ -320,7 +321,7 @@ export default function Navbar() {
                       borderRadius: 10,
                       textDecoration: "none",
                       fontSize: 16,
-                      fontWeight: isActive ? 700 : 500,
+                      fontWeight: isActive ? 800 : 500,
                       color: isActive ? "#ffffff" : C.navy,
                       background: isActive ? "linear-gradient(135deg, #0284c7 0%, #00b4d8 100%)" : "rgba(2, 132, 199, 0.04)",
                     }}
@@ -377,7 +378,7 @@ export default function Navbar() {
                   borderRadius: 10,
                   background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
                   color: "#ffffff",
-                  fontWeight: 700,
+                  fontWeight: 800,
                   fontSize: 15,
                   textDecoration: "none",
                   textAlign: "center",

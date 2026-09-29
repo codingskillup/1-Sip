@@ -20,75 +20,69 @@ const contacts = [
     icon: "📍",
     title: "Plant & Depot Location",
     detail: "Commercial Market, Ahmed Garden, Fort Abbas, Punjab, Pakistan",
-    sub: "Direct pickups and depot retail available",
+    sub: "Direct pickups, bottle exchanges & depot walk-ins",
   },
   {
     icon: "☎️",
-    title: "Call Helpline",
+    title: "Telephone Order Hotline",
     detail: "0312 6016060",
     link: "tel:+923126016060",
-    sub: "Available 8:00 AM – 10:00 PM daily",
+    sub: "Call directly for immediate local dispatch",
   },
   {
     icon: "💬",
-    title: "Instant WhatsApp Order",
+    title: "Official WhatsApp Support",
     detail: "0312 6016060",
-    link: "https://wa.me/923126016060?text=Hello%201%20Sip,%20I%20want%20to%20order%20water.",
-    sub: "Fast reply for home & office deliveries",
+    link: "https://wa.me/923126016060?text=Hello%201%20Sip,%20I%20would%20like%20to%20order%20water.",
+    sub: "Instant reply for orders & delivery tracking",
   },
   {
     icon: "🏢",
-    title: "Business Operator",
+    title: "Operating Business Firm",
     detail: "Mian Rayan Traders",
-    sub: "Official producer and distributor of 1 Sip",
+    sub: "Registered management and regional distributor",
   },
 ];
 
-const services = [
-  {
-    title: "Residential Home Supply",
-    desc: "Scheduled doorstep delivery of 19L dispenser bottles and carton packs for families across Fort Abbas.",
-  },
-  {
-    title: "Corporate & Clinic Accounts",
-    desc: "Monthly billing and dedicated dispenser maintenance for corporate offices, hospitals, and academic centers.",
-  },
-  {
-    title: "Event & Catering Cartons",
-    desc: "Bulk chilled 500ml and 1.5L carton deliveries for weddings, conferences, sports events, and public functions.",
-  },
+const coverageAreas = [
+  { zone: "Fort Abbas City & Commercial Area", time: "Same-Day Doorstep Delivery", badge: "Primary Hub" },
+  { zone: "Ahmed Garden & Surrounding Residential", time: "Daily 2-Hour Express Routes", badge: "Local Depot" },
+  { zone: "Haroonabad Road Corridor & Chishtian Link", time: "Scheduled Bi-Weekly Fleet", badge: "Regional" },
+  { zone: "Bulk Outstation Orders across Punjab", time: "Dedicated Truck Freight", badge: "Wholesale" },
 ];
 
 export default function ContactPage() {
   const [mobile, setMobile] = useState(false);
+  const [orderType, setOrderType] = useState("Home Delivery");
+  const [bottleSize, setBottleSize] = useState("19L Dispenser Gallon");
+  const [quantity, setQuantity] = useState(3);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    bottleSize: "19L Dispenser Gallon",
-    quantity: "2",
     address: "",
+    notes: "",
   });
 
   useEffect(() => {
-    const handleResize = () => setMobile(window.innerWidth <= 900);
+    const handleResize = () => setMobile(window.innerWidth <= 1040);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+  const handleWhatsAppDispatch = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hello 1 Sip!%0A*Name:* ${encodeURIComponent(formData.name || "Customer")}%0A*Phone:* ${encodeURIComponent(formData.phone)}%0A*Product:* ${encodeURIComponent(formData.bottleSize)}%0A*Quantity:* ${encodeURIComponent(formData.quantity)}%0A*Address:* ${encodeURIComponent(formData.address)}`;
-    window.open(`https://wa.me/923126016060?text=${msg}`, "_blank");
+    const text = `*New Water Order from 1 Sip Website*%0A%0A*Customer Name:* ${encodeURIComponent(formData.name || "Customer")}%0A*Contact Phone:* ${encodeURIComponent(formData.phone || "Not specified")}%0A*Order Purpose:* ${encodeURIComponent(orderType)}%0A*Selected Bottle:* ${encodeURIComponent(bottleSize)}%0A*Quantity:* ${quantity} units%0A*Delivery Address:* ${encodeURIComponent(formData.address || "Fort Abbas")}%0A${formData.notes ? `*Special Notes:* ${encodeURIComponent(formData.notes)}%0A` : ""}%0APlease confirm delivery time and dispatch. Thank you!`;
+    window.open(`https://wa.me/923126016060?text=${text}`, "_blank");
   };
 
   return (
     <div style={{ background: "#ffffff", overflow: "hidden" }}>
-      {/* ── 1. Header (Bright, Crystal Glacial Atmosphere) ── */}
+      {/* ── 1. Page Header (Spacious Glacial Purity) ── */}
       <section
         style={{
           background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ffffff 100%)",
-          padding: mobile ? "44px 0 50px" : "64px 0 76px",
+          padding: mobile ? "50px 0 56px" : "74px 0 88px",
           borderBottom: "1px solid rgba(2, 132, 199, 0.12)",
           position: "relative",
           overflow: "hidden",
@@ -99,44 +93,44 @@ export default function ContactPage() {
             position: "absolute",
             top: "-20%",
             right: "5%",
-            width: 500,
-            height: 500,
+            width: 550,
+            height: 550,
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
 
-        <div style={{ width: "min(93%, 1280px)", margin: "0 auto", position: "relative", zIndex: 2 }}>
+        <div style={{ width: "min(90%, 1280px)", margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              padding: "4px 14px",
-              borderRadius: 20,
+              padding: "6px 18px",
+              borderRadius: 30,
               background: "rgba(2, 132, 199, 0.08)",
               border: "1px solid rgba(2, 132, 199, 0.2)",
               color: C.ocean,
-              fontSize: 12,
-              fontWeight: 700,
+              fontSize: 12.5,
+              fontWeight: 800,
               letterSpacing: 1.2,
               textTransform: "uppercase",
-              marginBottom: 14,
+              marginBottom: 18,
             }}
           >
             <span>📞</span>
-            <span>Get in Touch</span>
+            <span>Customer Service & Ordering</span>
           </div>
 
           <h1
             style={{
-              margin: "0 0 14px",
-              fontSize: mobile ? 36 : 56,
+              margin: "0 0 18px",
+              fontSize: mobile ? 38 : 64,
               fontWeight: 900,
               color: C.navy,
               lineHeight: 1.1,
-              letterSpacing: -1,
+              letterSpacing: -1.4,
             }}
           >
             Fresh Hydration,{" "}
@@ -147,68 +141,70 @@ export default function ContactPage() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Delivered Quickly
+              Direct to Your Door
             </span>
           </h1>
 
-          <p style={{ margin: 0, fontSize: mobile ? 15 : 17, color: C.slate, maxWidth: 600, lineHeight: 1.7 }}>
-            Contact 1 Sip Natural Water for orders, home dispenser delivery schedules, wholesale agency contracts, or general inquiries.
+          <p style={{ margin: 0, fontSize: mobile ? 16 : 19, color: C.slate, maxWidth: 740, lineHeight: 1.75 }}>
+            Place your order in seconds for household 19L dispensers, 500ml and 1.5L carton deliveries, or inquire for retail distribution across Punjab.
           </p>
         </div>
       </section>
 
-      {/* ── 2. Contact Details & Direct Order Form ── */}
-      <section style={{ padding: mobile ? "50px 0" : "80px 0", background: "#ffffff" }}>
+      {/* ── 2. Interactive Order Calculator & Depot Contacts (Spacious Width) ── */}
+      <section style={{ padding: mobile ? "60px 0" : "100px 0", background: "#ffffff" }}>
         <div
           style={{
-            width: "min(93%, 1280px)",
+            width: "min(90%, 1280px)",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: mobile ? "1fr" : "1.1fr 1.3fr",
-            gap: mobile ? 40 : 64,
+            gridTemplateColumns: mobile ? "1fr" : "1.1fr 1.35fr",
+            gap: mobile ? 40 : 72,
             alignItems: "start",
           }}
         >
-          {/* Left Column: Direct Contacts */}
+          {/* Left: Contact Details & Service Hours */}
           <div>
-            <div style={{ color: C.ocean, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, marginBottom: 8 }}>
-              Direct Channels
+            <div style={{ color: C.ocean, fontSize: 12.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 10 }}>
+              Direct Inquiries
             </div>
-            <h2 style={{ margin: "0 0 20px", fontSize: mobile ? 26 : 36, fontWeight: 900, color: C.navy, letterSpacing: -0.6 }}>
-              We Are Ready to Assist You
+            <h2 style={{ margin: "0 0 24px", fontSize: mobile ? 30 : 40, fontWeight: 900, color: C.navy, letterSpacing: -0.8 }}>
+              Contact Our Depot Team
             </h2>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 36 }}>
               {contacts.map((c) => (
                 <div
                   key={c.title}
+                  className="hover-lift"
                   style={{
                     display: "flex",
-                    gap: 16,
+                    gap: 18,
                     alignItems: "flex-start",
-                    background: "rgba(2, 132, 199, 0.03)",
-                    border: "1px solid rgba(2, 132, 199, 0.12)",
-                    borderRadius: 16,
-                    padding: "20px",
+                    background: "linear-gradient(180deg, #f8fcff 0%, #ffffff 100%)",
+                    border: "1.5px solid rgba(2, 132, 199, 0.14)",
+                    borderRadius: 20,
+                    padding: "24px",
+                    boxShadow: "0 4px 16px rgba(2, 132, 199, 0.04)",
                   }}
                 >
                   <div
                     style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 12,
+                      width: 52,
+                      height: 52,
+                      borderRadius: 16,
                       background: "rgba(2, 132, 199, 0.1)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: 22,
+                      fontSize: 24,
                       flexShrink: 0,
                     }}
                   >
                     {c.icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: C.ocean, textTransform: "uppercase", marginBottom: 2 }}>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, color: C.ocean, textTransform: "uppercase", marginBottom: 3 }}>
                       {c.title}
                     </div>
                     {c.link ? (
@@ -216,8 +212,8 @@ export default function ContactPage() {
                         href={c.link}
                         target={c.link.startsWith("http") ? "_blank" : undefined}
                         style={{
-                          fontSize: 17,
-                          fontWeight: 800,
+                          fontSize: 19,
+                          fontWeight: 900,
                           color: C.navy,
                           textDecoration: "none",
                           display: "inline-block",
@@ -227,18 +223,18 @@ export default function ContactPage() {
                         {c.detail}
                       </Link>
                     ) : (
-                      <div style={{ fontSize: 15.5, fontWeight: 700, color: C.navy, marginBottom: 4 }}>
+                      <div style={{ fontSize: 17, fontWeight: 900, color: C.navy, marginBottom: 4 }}>
                         {c.detail}
                       </div>
                     )}
-                    <div style={{ fontSize: 13, color: C.slate }}>{c.sub}</div>
+                    <div style={{ fontSize: 14, color: C.slate }}>{c.sub}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Quick Action Dial Buttons */}
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {/* Direct Quick Actions */}
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
               <Link
                 href="tel:+923126016060"
                 style={{
@@ -247,13 +243,13 @@ export default function ContactPage() {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 8,
-                  padding: "14px 22px",
-                  borderRadius: 12,
+                  padding: "16px 26px",
+                  borderRadius: 14,
                   background: "rgba(2, 132, 199, 0.08)",
-                  border: "1px solid rgba(2, 132, 199, 0.2)",
+                  border: "1.5px solid rgba(2, 132, 199, 0.25)",
                   color: C.navy,
-                  fontSize: 14.5,
-                  fontWeight: 700,
+                  fontSize: 15.5,
+                  fontWeight: 800,
                   textDecoration: "none",
                 }}
               >
@@ -268,71 +264,203 @@ export default function ContactPage() {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 8,
-                  padding: "14px 22px",
-                  borderRadius: 12,
+                  padding: "16px 26px",
+                  borderRadius: 14,
                   background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                   color: "#ffffff",
-                  fontSize: 14.5,
-                  fontWeight: 700,
+                  fontSize: 15.5,
+                  fontWeight: 800,
                   textDecoration: "none",
-                  boxShadow: "0 6px 20px rgba(16, 185, 129, 0.28)",
+                  boxShadow: "0 8px 24px rgba(16, 185, 129, 0.3)",
                 }}
               >
-                <span>💬 WhatsApp Direct</span>
+                <span>💬 WhatsApp Us</span>
               </Link>
+            </div>
+
+            {/* Depot Hours Info Box */}
+            <div
+              style={{
+                background: "rgba(2, 132, 199, 0.04)",
+                border: "1px solid rgba(2, 132, 199, 0.14)",
+                borderRadius: 18,
+                padding: "24px 28px",
+              }}
+            >
+              <div style={{ fontSize: 14, fontWeight: 900, color: C.navy, marginBottom: 8 }}>
+                🕒 Standard Delivery & Depot Timings
+              </div>
+              <div style={{ fontSize: 14.5, color: C.slate, lineHeight: 1.7 }}>
+                <strong>Monday to Sunday:</strong> 8:00 AM – 10:00 PM <br />
+                Emergency office, hospital and event replenishments are accommodated 7 days a week.
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Order Dispatch Generator Form */}
+          {/* Right: Interactive Order Dispatch Generator Form */}
           <div
             style={{
               background: "linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%)",
-              border: "1.5px solid rgba(2, 132, 199, 0.18)",
-              borderRadius: 24,
-              padding: mobile ? "28px 20px" : "40px",
-              boxShadow: "0 16px 40px rgba(2, 132, 199, 0.08)",
+              border: "1.5px solid rgba(2, 132, 199, 0.2)",
+              borderRadius: 28,
+              padding: mobile ? "32px 24px" : "48px",
+              boxShadow: "0 24px 56px rgba(2, 132, 199, 0.08)",
             }}
           >
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", color: C.ocean, letterSpacing: 1 }}>
-                Instant Order Generator
+            <div style={{ marginBottom: 28 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 800, textTransform: "uppercase", color: C.ocean, letterSpacing: 1.4 }}>
+                Smart Order Dispatch Generator
               </div>
-              <h3 style={{ margin: "6px 0 0", fontSize: 24, fontWeight: 900, color: C.navy }}>
-                Request Home or Office Delivery
+              <h3 style={{ margin: "8px 0 0", fontSize: 28, fontWeight: 900, color: C.navy }}>
+                Request Home / Office Delivery
               </h3>
-              <p style={{ margin: "6px 0 0", fontSize: 14, color: C.slate }}>
-                Fill out the details below to dispatch your order directly to our Fort Abbas delivery coordinator via WhatsApp.
+              <p style={{ margin: "8px 0 0", fontSize: 15, color: C.slate }}>
+                Select your hydration requirement below to generate an instant, formatted delivery request directly to our Fort Abbas delivery coordinator.
               </p>
             </div>
 
-            <form onSubmit={handleWhatsAppSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <form onSubmit={handleWhatsAppDispatch} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {/* Purpose Selector */}
               <div>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>
-                  Full Name / Business Name *
+                <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 10 }}>
+                  1. Order Category / Purpose
                 </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Tariq Mehmood / Ahmed Traders"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  style={{
-                    width: "100%",
-                    padding: "12px 16px",
-                    borderRadius: 10,
-                    border: "1px solid rgba(2, 132, 199, 0.2)",
-                    background: "#ffffff",
-                    fontSize: 14.5,
-                    color: C.navy,
-                    outline: "none",
-                  }}
-                />
+                <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 10 }}>
+                  {["Home Delivery", "Office Supply", "Wedding / Event", "Retail Store"].map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setOrderType(cat)}
+                      style={{
+                        padding: "12px 10px",
+                        borderRadius: 12,
+                        border: orderType === cat ? `2px solid ${C.ocean}` : "1.5px solid rgba(2, 132, 199, 0.16)",
+                        background: orderType === cat ? "rgba(2, 132, 199, 0.12)" : "#ffffff",
+                        color: orderType === cat ? C.ocean : C.navy,
+                        fontSize: 13,
+                        fontWeight: orderType === cat ? 800 : 600,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 14 }}>
+              {/* Bottle Size Selector */}
+              <div>
+                <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 10 }}>
+                  2. Select Bottle Format
+                </label>
+                <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)", gap: 12 }}>
+                  {[
+                    { label: "19L Dispenser Gallon", sub: "Standard for Cooler" },
+                    { label: "500ml (Carton of 24)", sub: "Travel & Gym" },
+                    { label: "1.5L (Pack of 12)", sub: "Family Table" },
+                  ].map((b) => (
+                    <button
+                      key={b.label}
+                      type="button"
+                      onClick={() => setBottleSize(b.label)}
+                      style={{
+                        padding: "14px",
+                        borderRadius: 14,
+                        border: bottleSize === b.label ? `2px solid ${C.ocean}` : "1.5px solid rgba(2, 132, 199, 0.16)",
+                        background: bottleSize === b.label ? "rgba(2, 132, 199, 0.12)" : "#ffffff",
+                        textAlign: "left",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <div style={{ fontSize: 14, fontWeight: 900, color: C.navy }}>{b.label}</div>
+                      <div style={{ fontSize: 12, color: C.slate, marginTop: 3 }}>{b.sub}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quantity Counter */}
+              <div>
+                <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 10 }}>
+                  3. Quantity Required ({bottleSize.includes("Gallon") ? "Gallons" : "Cartons / Packs"})
+                </label>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 12,
+                      border: "1.5px solid rgba(2, 132, 199, 0.2)",
+                      background: "#ffffff",
+                      fontSize: 22,
+                      fontWeight: 900,
+                      color: C.ocean,
+                      cursor: "pointer",
+                    }}
+                  >
+                    −
+                  </button>
+                  <div
+                    style={{
+                      minWidth: 70,
+                      textAlign: "center",
+                      fontSize: 24,
+                      fontWeight: 900,
+                      color: C.navy,
+                    }}
+                  >
+                    {quantity}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(quantity + 1)}
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 12,
+                      border: "1.5px solid rgba(2, 132, 199, 0.2)",
+                      background: "#ffffff",
+                      fontSize: 22,
+                      fontWeight: 900,
+                      color: C.ocean,
+                      cursor: "pointer",
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Customer Info */}
+              <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 16 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>
-                    Contact Phone *
+                  <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 6 }}>
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Tariq Mehmood"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    style={{
+                      width: "100%",
+                      padding: "14px 18px",
+                      borderRadius: 12,
+                      border: "1.5px solid rgba(2, 132, 199, 0.2)",
+                      background: "#ffffff",
+                      fontSize: 15,
+                      color: C.navy,
+                      outline: "none",
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 6 }}>
+                    Phone Number *
                   </label>
                   <input
                     type="tel"
@@ -342,83 +470,35 @@ export default function ContactPage() {
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     style={{
                       width: "100%",
-                      padding: "12px 16px",
-                      borderRadius: 10,
-                      border: "1px solid rgba(2, 132, 199, 0.2)",
+                      padding: "14px 18px",
+                      borderRadius: 12,
+                      border: "1.5px solid rgba(2, 132, 199, 0.2)",
                       background: "#ffffff",
-                      fontSize: 14.5,
+                      fontSize: 15,
                       color: C.navy,
                       outline: "none",
                     }}
                   />
                 </div>
-
-                <div>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>
-                    Select Bottle Format *
-                  </label>
-                  <select
-                    value={formData.bottleSize}
-                    onChange={(e) => setFormData({ ...formData, bottleSize: e.target.value })}
-                    style={{
-                      width: "100%",
-                      padding: "12px 16px",
-                      borderRadius: 10,
-                      border: "1px solid rgba(2, 132, 199, 0.2)",
-                      background: "#ffffff",
-                      fontSize: 14.5,
-                      color: C.navy,
-                      outline: "none",
-                    }}
-                  >
-                    <option value="500ml Pocket Bottle (24 Cartons)">500ml (24-Bottle Carton)</option>
-                    <option value="1.5L Family Bottle (12 Cartons)">1.5L (12-Bottle Carton)</option>
-                    <option value="19L Dispenser Gallon">19L Dispenser Gallon</option>
-                    <option value="Bulk Mix / Event Order">Bulk Mix / Event Order</option>
-                  </select>
-                </div>
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>
-                  Quantity / Monthly Requirement *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. 5 Gallons / 10 Cartons"
-                  value={formData.quantity}
-                  onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  style={{
-                    width: "100%",
-                    padding: "12px 16px",
-                    borderRadius: 10,
-                    border: "1px solid rgba(2, 132, 199, 0.2)",
-                    background: "#ffffff",
-                    fontSize: 14.5,
-                    color: C.navy,
-                    outline: "none",
-                  }}
-                />
-              </div>
-
-              <div>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>
-                  Delivery Address in Fort Abbas / Area *
+                <label style={{ display: "block", fontSize: 13.5, fontWeight: 800, color: C.navy, marginBottom: 6 }}>
+                  Delivery Address in Fort Abbas or Nearby *
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   required
-                  placeholder="House / Shop / Office address..."
+                  placeholder="Street / House # / Shop name in Fort Abbas..."
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   style={{
                     width: "100%",
-                    padding: "12px 16px",
-                    borderRadius: 10,
-                    border: "1px solid rgba(2, 132, 199, 0.2)",
+                    padding: "14px 18px",
+                    borderRadius: 12,
+                    border: "1.5px solid rgba(2, 132, 199, 0.2)",
                     background: "#ffffff",
-                    fontSize: 14.5,
+                    fontSize: 15,
                     color: C.navy,
                     outline: "none",
                     resize: "none",
@@ -426,26 +506,50 @@ export default function ContactPage() {
                 />
               </div>
 
+              {/* Order Preview Summary Box */}
+              <div
+                style={{
+                  background: "rgba(16, 185, 129, 0.08)",
+                  border: "1px solid rgba(16, 185, 129, 0.2)",
+                  borderRadius: 14,
+                  padding: "14px 18px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: 8,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 11.5, fontWeight: 700, color: "#059669", textTransform: "uppercase" }}>Order Preview</div>
+                  <div style={{ fontSize: 15, fontWeight: 900, color: C.navy }}>
+                    {quantity} × {bottleSize} ({orderType})
+                  </div>
+                </div>
+                <span style={{ fontSize: 12.5, fontWeight: 800, color: "#059669" }}>
+                  ✓ Instant Dispatch via WhatsApp
+                </span>
+              </div>
+
               <button
                 type="submit"
                 style={{
-                  marginTop: 6,
-                  padding: "14px 28px",
-                  borderRadius: 12,
+                  padding: "16px 32px",
+                  borderRadius: 14,
                   background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                   color: "#ffffff",
-                  fontSize: 15,
-                  fontWeight: 800,
+                  fontSize: 16,
+                  fontWeight: 900,
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 8px 24px rgba(16, 185, 129, 0.3)",
+                  boxShadow: "0 8px 24px rgba(16, 185, 129, 0.35)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 8,
                 }}
               >
-                <span>💬 Send Order via WhatsApp</span>
+                <span>💬 Send Order to WhatsApp Dispatch</span>
                 <span>→</span>
               </button>
             </form>
@@ -453,49 +557,71 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── 3. Services Overview ── */}
+      {/* ── 3. Delivery Coverage Zones (Spacious Width) ── */}
       <section
         style={{
           background: "linear-gradient(180deg, #f8fcff 0%, #ffffff 100%)",
-          padding: mobile ? "50px 0" : "80px 0",
+          padding: mobile ? "60px 0" : "100px 0",
           borderTop: "1px solid rgba(2, 132, 199, 0.1)",
         }}
       >
-        <div style={{ width: "min(93%, 1280px)", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 48px" }}>
-            <div style={{ color: C.ocean, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, marginBottom: 8 }}>
-              Supply Capabilities
+        <div style={{ width: "min(90%, 1280px)", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 48px" }}>
+            <div style={{ color: C.ocean, fontSize: 12.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 10 }}>
+              Distribution Network
             </div>
-            <h2 style={{ margin: 0, fontSize: mobile ? 28 : 38, fontWeight: 900, color: C.navy, letterSpacing: -0.6 }}>
-              Tailored Delivery Programs
+            <h2 style={{ margin: "0 0 14px", fontSize: mobile ? 30 : 42, fontWeight: 900, color: C.navy, letterSpacing: -0.8 }}>
+              Where We Deliver in Punjab
             </h2>
+            <p style={{ margin: 0, fontSize: 16, color: C.slate, lineHeight: 1.7 }}>
+              Operating direct daily delivery vans and partnering with regional freight carriers to ensure unhindered water access.
+            </p>
           </div>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "repeat(3, 1fr)",
+              gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)",
               gap: 24,
             }}
           >
-            {services.map((s) => (
+            {coverageAreas.map((area) => (
               <div
-                key={s.title}
+                key={area.zone}
+                className="hover-lift"
                 style={{
                   background: "#ffffff",
-                  border: "1px solid rgba(2, 132, 199, 0.12)",
+                  border: "1.5px solid rgba(2, 132, 199, 0.14)",
                   borderRadius: 18,
-                  padding: "30px 24px",
+                  padding: "26px 24px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   boxShadow: "0 4px 18px rgba(2, 132, 199, 0.04)",
+                  flexWrap: "wrap",
+                  gap: 14,
                 }}
               >
-                <div style={{ fontSize: 28, marginBottom: 14 }}>🚚</div>
-                <h3 style={{ margin: "0 0 10px", fontSize: 18, fontWeight: 800, color: C.navy }}>
-                  {s.title}
-                </h3>
-                <p style={{ margin: 0, fontSize: 14, color: C.slate, lineHeight: 1.65 }}>
-                  {s.desc}
-                </p>
+                <div>
+                  <div style={{ fontSize: 16.5, fontWeight: 900, color: C.navy, marginBottom: 4 }}>
+                    📍 {area.zone}
+                  </div>
+                  <div style={{ fontSize: 14, color: C.slate }}>
+                    ⏱️ {area.time}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    background: "rgba(2, 132, 199, 0.1)",
+                    color: C.ocean,
+                    padding: "6px 14px",
+                    borderRadius: 20,
+                    fontSize: 12.5,
+                    fontWeight: 800,
+                  }}
+                >
+                  {area.badge}
+                </span>
               </div>
             ))}
           </div>

@@ -74,12 +74,12 @@ export default function Footer() {
         }}
       />
 
-      {/* ── Pre-Footer Floating CTA Card ── */}
+      {/* ── Pre-Footer Floating CTA Card (Luxury Framed Width) ── */}
       <div
         style={{
-          width: "min(93%, 1280px)",
+          width: "min(90%, 1280px)",
           margin: "0 auto",
-          paddingTop: 48,
+          padding: "56px 0 0",
           position: "relative",
           zIndex: 2,
         }}
@@ -88,19 +88,19 @@ export default function Footer() {
           style={{
             background: "linear-gradient(135deg, rgba(2, 132, 199, 0.22) 0%, rgba(4, 27, 47, 0.95) 100%)",
             border: `1px solid ${C.borderAqua}`,
-            borderRadius: 20,
-            padding: "36px 40px",
-            boxShadow: "0 20px 48px rgba(0, 0, 0, 0.35)",
+            borderRadius: 24,
+            padding: "44px 52px",
+            boxShadow: "0 24px 56px rgba(0, 0, 0, 0.35)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: 24,
+            gap: 28,
           }}
         >
-          <div style={{ maxWidth: 580 }}>
+          <div style={{ maxWidth: 680 }}>
             <div
               style={{
                 display: "inline-flex",
@@ -108,28 +108,28 @@ export default function Footer() {
                 gap: 8,
                 background: "rgba(0, 180, 216, 0.15)",
                 border: "1px solid rgba(0, 180, 216, 0.35)",
-                padding: "4px 14px",
+                padding: "5px 16px",
                 borderRadius: 20,
                 fontSize: 12,
-                fontWeight: 700,
+                fontWeight: 800,
                 color: C.aqua,
                 textTransform: "uppercase",
-                letterSpacing: 1,
-                marginBottom: 12,
+                letterSpacing: 1.2,
+                marginBottom: 14,
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#25d366" }} />
-              Fresh Batches Dispatched Daily
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#25d366" }} />
+              Fresh Batches Bottled & Dispatched Daily
             </div>
-            <h3 style={{ margin: "0 0 8px", fontSize: "clamp(22px, 3vw, 30px)", fontWeight: 800, color: "#ffffff", letterSpacing: -0.5 }}>
+            <h3 style={{ margin: "0 0 10px", fontSize: "clamp(24px, 3.2vw, 34px)", fontWeight: 900, color: "#ffffff", letterSpacing: -0.6 }}>
               Ready to Taste Nature in Every Sip?
             </h3>
-            <p style={{ margin: 0, fontSize: 14.5, color: "#cbd5e1", lineHeight: 1.6 }}>
-              Order genuine 1 Sip Natural Water for homes, offices, schools, and corporate events across Fort Abbas & Punjab.
+            <p style={{ margin: 0, fontSize: 15.5, color: "#cbd5e1", lineHeight: 1.65 }}>
+              Order genuine 1 Sip Natural Mineral Water for homes, offices, schools, and corporate events across Fort Abbas & Punjab.
             </p>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
             <Link
               href="https://wa.me/923126016060?text=Hello%201%20Sip,%20I%20would%20like%20to%20order%20water%20bottles."
               target="_blank"
@@ -137,12 +137,12 @@ export default function Footer() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 9,
-                padding: "13px 26px",
-                borderRadius: 12,
+                padding: "15px 30px",
+                borderRadius: 14,
                 background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                 color: "#ffffff",
-                fontSize: 14.5,
-                fontWeight: 700,
+                fontSize: 15,
+                fontWeight: 800,
                 textDecoration: "none",
                 boxShadow: "0 8px 24px rgba(16, 185, 129, 0.35)",
                 transition: "transform 0.2s ease",
@@ -158,13 +158,13 @@ export default function Footer() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                padding: "13px 22px",
-                borderRadius: 12,
+                padding: "14px 26px",
+                borderRadius: 14,
                 background: "rgba(255, 255, 255, 0.08)",
                 border: "1px solid rgba(255, 255, 255, 0.18)",
                 color: "#ffffff",
-                fontSize: 14.5,
-                fontWeight: 600,
+                fontSize: 15,
+                fontWeight: 700,
                 textDecoration: "none",
                 transition: "background 0.2s ease",
               }}
@@ -175,22 +175,22 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Main Footer Grid ── */}
+      {/* ── Main Footer Grid (Luxury Framed Width) ── */}
       <div
         style={{
           position: "relative",
           zIndex: 2,
-          width: "min(93%, 1280px)",
+          width: "min(90%, 1280px)",
           margin: "0 auto",
-          padding: "60px 0 36px",
+          padding: "68px 0 40px",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 40,
-            marginBottom: 50,
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 48,
+            marginBottom: 56,
           }}
         >
           {/* Column 1: Brand Info */}
@@ -200,43 +200,43 @@ export default function Footer() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: 12,
+                gap: 14,
                 textDecoration: "none",
-                marginBottom: 18,
+                marginBottom: 20,
               }}
             >
               <div
                 style={{
-                  width: 52,
-                  height: 52,
+                  width: 54,
+                  height: 54,
                   borderRadius: "50%",
-                  background: "radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, rgba(2, 132, 199, 0.05) 100%)",
+                  background: "radial-gradient(circle, rgba(0, 180, 216, 0.25) 0%, rgba(2, 132, 199, 0.05) 100%)",
                   border: "1.5px solid rgba(0, 180, 216, 0.4)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 0 20px rgba(0, 180, 216, 0.25)",
+                  boxShadow: "0 0 24px rgba(0, 180, 216, 0.25)",
                 }}
               >
                 <Image
                   src="/images/oneSipLogo.png"
                   alt="1 Sip Logo"
-                  width={46}
-                  height={46}
+                  width={48}
+                  height={48}
                   style={{ width: "90%", height: "90%", objectFit: "contain" }}
                 />
               </div>
               <div>
-                <div style={{ color: "#ffffff", fontSize: 19, fontWeight: 900, lineHeight: 1.1, letterSpacing: -0.5 }}>
+                <div style={{ color: "#ffffff", fontSize: 20, fontWeight: 900, lineHeight: 1.1, letterSpacing: -0.5 }}>
                   1 Sip
                 </div>
-                <div style={{ color: C.aqua, fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", fontWeight: 700 }}>
+                <div style={{ color: C.aqua, fontSize: 11, letterSpacing: 1.4, textTransform: "uppercase", fontWeight: 700 }}>
                   Natural Mineral Water
                 </div>
               </div>
             </Link>
 
-            <p style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.7, margin: "0 0 20px", maxWidth: 300 }}>
+            <p style={{ color: "#94a3b8", fontSize: 14.5, lineHeight: 1.7, margin: "0 0 22px", maxWidth: 320 }}>
               Rooted in the pristine essence of Cholistan — delivering clean, refreshing, and scientifically balanced drinking water to homes and workplaces.
             </p>
 
@@ -253,12 +253,12 @@ export default function Footer() {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 8,
-                    fontSize: 12.5,
+                    fontSize: 13,
                     color: "#cbd5e1",
                     background: "rgba(255, 255, 255, 0.04)",
-                    padding: "5px 10px",
-                    borderRadius: 6,
-                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    padding: "6px 12px",
+                    borderRadius: 8,
+                    border: "1px solid rgba(255, 255, 255, 0.07)",
                   }}
                 >
                   <span>{b.icon}</span>
@@ -273,16 +273,16 @@ export default function Footer() {
             <div
               style={{
                 color: C.aqua,
-                fontSize: 12,
+                fontSize: 12.5,
                 fontWeight: 800,
                 textTransform: "uppercase",
                 letterSpacing: 1.5,
-                marginBottom: 20,
+                marginBottom: 22,
               }}
             >
               Explore 1 Sip
             </div>
-            <nav style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 13 }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -290,23 +290,23 @@ export default function Footer() {
                   style={{
                     color: "#cbd5e1",
                     textDecoration: "none",
-                    fontSize: 14.5,
-                    fontWeight: 500,
+                    fontSize: 15,
+                    fontWeight: 600,
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: 6,
+                    gap: 8,
                     transition: "all 0.2s ease",
                   }}
                 >
-                  <span style={{ color: C.aqua, fontSize: 12 }}>›</span>
+                  <span style={{ color: C.aqua, fontSize: 13 }}>›</span>
                   <span>{link.label}</span>
                 </Link>
               ))}
             </nav>
 
-            <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 8 }}>Parent Organization</div>
-              <div style={{ color: "#ffffff", fontSize: 14, fontWeight: 700 }}>
+            <div style={{ marginTop: 26, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+              <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 6 }}>Parent Organization</div>
+              <div style={{ color: "#ffffff", fontSize: 14.5, fontWeight: 800 }}>
                 🏢 Mian Rayan Traders
               </div>
             </div>
@@ -317,11 +317,11 @@ export default function Footer() {
             <div
               style={{
                 color: C.aqua,
-                fontSize: 12,
+                fontSize: 12.5,
                 fontWeight: 800,
                 textTransform: "uppercase",
                 letterSpacing: 1.5,
-                marginBottom: 20,
+                marginBottom: 22,
               }}
             >
               Bottle Sizes
@@ -333,15 +333,15 @@ export default function Footer() {
                   href={b.href}
                   style={{
                     textDecoration: "none",
-                    padding: "10px 14px",
-                    borderRadius: 10,
+                    padding: "12px 16px",
+                    borderRadius: 12,
                     background: "rgba(255, 255, 255, 0.03)",
-                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.07)",
                     transition: "background 0.2s ease",
                   }}
                 >
-                  <div style={{ color: "#ffffff", fontSize: 14, fontWeight: 700 }}>{b.size}</div>
-                  <div style={{ color: "#94a3b8", fontSize: 12, marginTop: 2 }}>{b.desc}</div>
+                  <div style={{ color: "#ffffff", fontSize: 14.5, fontWeight: 800 }}>{b.size}</div>
+                  <div style={{ color: "#94a3b8", fontSize: 12.5, marginTop: 2 }}>{b.desc}</div>
                 </Link>
               ))}
             </div>
@@ -352,20 +352,20 @@ export default function Footer() {
             <div
               style={{
                 color: C.aqua,
-                fontSize: 12,
+                fontSize: 12.5,
                 fontWeight: 800,
                 textTransform: "uppercase",
                 letterSpacing: 1.5,
-                marginBottom: 20,
+                marginBottom: 22,
               }}
             >
               Plant & Depot Contact
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>📍</span>
-                <span style={{ color: "#cbd5e1", fontSize: 13.5, lineHeight: 1.5 }}>
+                <span style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.55 }}>
                   Commercial Market, Ahmed Garden, Fort Abbas, Punjab, Pakistan
                 </span>
               </div>
@@ -374,7 +374,7 @@ export default function Footer() {
                 <span style={{ fontSize: 16, flexShrink: 0 }}>☎️</span>
                 <Link
                   href="tel:+923126016060"
-                  style={{ color: "#ffffff", fontSize: 14.5, fontWeight: 700, textDecoration: "none" }}
+                  style={{ color: "#ffffff", fontSize: 15, fontWeight: 800, textDecoration: "none" }}
                 >
                   0312 6016060
                 </Link>
@@ -382,30 +382,30 @@ export default function Footer() {
 
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>🕒</span>
-                <span style={{ color: "#cbd5e1", fontSize: 13 }}>
+                <span style={{ color: "#cbd5e1", fontSize: 13.5 }}>
                   Mon – Sun: 8:00 AM – 10:00 PM
                 </span>
               </div>
 
               {/* Social Media Links */}
               <div style={{ marginTop: 10 }}>
-                <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 10, fontWeight: 600 }}>
+                <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 10, fontWeight: 700 }}>
                   Follow Us Online:
                 </div>
                 <div style={{ display: "flex", gap: 10 }}>
                   {[
-                    { label: "Facebook", col: "#1877f2", icon: <FacebookSVG /> },
-                    { label: "Instagram", col: "#e1306c", icon: <InstagramSVG /> },
-                    { label: "TikTok", col: "#00f2fe", icon: <TikTokSVG /> },
-                    { label: "YouTube", col: "#ff0000", icon: <YoutubeSVG /> },
+                    { label: "Facebook", icon: <FacebookSVG /> },
+                    { label: "Instagram", icon: <InstagramSVG /> },
+                    { label: "TikTok", icon: <TikTokSVG /> },
+                    { label: "YouTube", icon: <YoutubeSVG /> },
                   ].map((s) => (
                     <Link
                       key={s.label}
                       href="#"
                       title={s.label}
                       style={{
-                        width: 38,
-                        height: 38,
+                        width: 40,
+                        height: 40,
                         borderRadius: "50%",
                         background: "rgba(255, 255, 255, 0.06)",
                         border: "1px solid rgba(255, 255, 255, 0.12)",
@@ -430,15 +430,15 @@ export default function Footer() {
         <div
           style={{
             borderTop: `1px solid ${C.borderLight}`,
-            paddingTop: 26,
+            paddingTop: 28,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: 14,
+            gap: 16,
           }}
         >
-          <div style={{ color: "#94a3b8", fontSize: 13 }}>
+          <div style={{ color: "#94a3b8", fontSize: 13.5 }}>
             © {new Date().getFullYear()} 1 Sip Natural Mineral Water. Produced & distributed by Mian Rayan Traders.
           </div>
 
@@ -447,7 +447,7 @@ export default function Footer() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              fontSize: 13,
+              fontSize: 13.5,
               fontWeight: 700,
               color: C.aqua,
             }}
